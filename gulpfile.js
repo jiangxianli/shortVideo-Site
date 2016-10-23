@@ -14,6 +14,14 @@ require('laravel-elixir-vue-2');
  */
 
 elixir(mix => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+
+    mix.scripts([
+        'zd-video.js',
+        'app.js'
+    ],'public/js/app.js')
+    .sass('app.scss')
+    .styles([
+        './public/css/app.css',
+        './resources/assets/css/style.css'
+    ],'public/css/app.css');
 });

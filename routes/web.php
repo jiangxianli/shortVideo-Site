@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('short-video.index');
 });
+
+Route::get('/normal-list','ApiController@getNormalList');
