@@ -1,6 +1,8 @@
 @extends('layout.html')
 
-
+@section('title')
+    小视频
+@stop
 @section('body')
     <!-- page集合的容器，里面放多个平行的.page，其他.page作为内联页面由路由控制展示 -->
     <div class="page-group">
