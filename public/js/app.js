@@ -265,41 +265,41 @@ $(function () {
     var notInItem = Array();
     var cardItems = $('.card-items');
     var hasMore = true;
-    function getNormalList(curPage,notInItem){
+
+    function getNormalList(curPage, notInItem) {
 
         $.ajax({
-            url:'/normal-list',
-            method:'GET',
-            data:{ page : curPage , not_in_item : notInItem},
-            success:function(response){
+            url: '/normal-list',
+            method: 'GET',
+            data: {page: curPage, not_in_item: notInItem},
+            success: function (response) {
+                console.info(response)
                 cardItems.append(response.view)
                 renderVideo();
                 curPage++;
+                if(response.current_page == response.last_page){
+                    hasMore = false;
+                }
             }
         })
     }
 
-    function renderVideo(){
+    //渲染视频
+    function renderVideo() {
 
         $('.card-new').each(function (i, item) {
             var _this = $(item);
             var card = _this.find('.video-card')
-            //if(_this.find('video')){
-            //    return ;
-            //}
             _this.removeClass('card-new');
             notInItem.push(card.attr('id'))
             console.info(card.attr('id'))
-            card.css({'width':_this.outerWidth()});
-            //console.info(cardHeadr.width())
-            //console.info(_this.attr('data-id'))
+            card.css({'width': _this.outerWidth()});
             var video = new ZdVideo({
                 container: card.attr('id'),
                 source: card.attr('data-src'),
                 poster: card.attr('data-poster'),
-                width : parseInt(_this.outerWidth()),
-                height:200,
-                //preload : true,
+                width: parseInt(_this.outerWidth()),
+                height: 200,
                 clickFun: function () {
                     console.info(video.video.src)
                     if (!video.video.src) {
@@ -315,7 +315,7 @@ $(function () {
 
     }
 
-    getNormalList(1,notInItem);
+    getNormalList(1, notInItem);
 
 
     // 加载flag
@@ -332,7 +332,7 @@ $(function () {
     var lastIndex = 20;
 
     // 注册'infinite'事件处理函数
-    $(document).on('infinite', '.infinite-scroll-bottom',function() {
+    $(document).on('infinite', '.infinite-scroll-bottom', function () {
 
         // 如果正在加载，则退出
         if (loading) return;
@@ -345,13 +345,13 @@ $(function () {
             // 重置加载flag
             loading = false;
 
-            //if (lastIndex >= maxItems) {
-            //    // 加载完毕，则注销无限加载事件，以防不必要的加载
-            //    $.detachInfiniteScroll($('.infinite-scroll'));
-            //    // 删除加载提示符
-            //    $('.infinite-scroll-preloader').remove();
-            //    return;
-            //}
+            if (hasMore == false) {
+                // 加载完毕，则注销无限加载事件，以防不必要的加载
+                $.detachInfiniteScroll($('.infinite-scroll'));
+                // 删除加载提示符
+                $('.infinite-scroll-preloader').remove();
+                return;
+            }
 
             // 添加新条目
             getNormalList(curPage, notInItem);

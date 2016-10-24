@@ -33,9 +33,13 @@ $(function () {
             method: 'GET',
             data: {page: curPage, not_in_item: notInItem},
             success: function (response) {
+                console.info(response)
                 cardItems.append(response.view)
                 renderVideo();
                 curPage++;
+                if(response.current_page == response.last_page){
+                    hasMore = false;
+                }
             }
         })
     }
@@ -101,13 +105,13 @@ $(function () {
             // 重置加载flag
             loading = false;
 
-            //if (lastIndex >= maxItems) {
-            //    // 加载完毕，则注销无限加载事件，以防不必要的加载
-            //    $.detachInfiniteScroll($('.infinite-scroll'));
-            //    // 删除加载提示符
-            //    $('.infinite-scroll-preloader').remove();
-            //    return;
-            //}
+            if (hasMore == false) {
+                // 加载完毕，则注销无限加载事件，以防不必要的加载
+                $.detachInfiniteScroll($('.infinite-scroll'));
+                // 删除加载提示符
+                $('.infinite-scroll-preloader').remove();
+                return;
+            }
 
             // 添加新条目
             getNormalList(curPage, notInItem);
