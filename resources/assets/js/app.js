@@ -25,15 +25,15 @@ $(function () {
     var notInItem = Array();
     var cardItems = $('.card-items');
     var hasMore = true;
+    var curPlayVideo = null;
 
-    function getNormalList(curPage, notInItem) {
+    function getNormalList(page, notInItem) {
 
         $.ajax({
             url: '/normal-list',
             method: 'GET',
-            data: {page: curPage, not_in_item: notInItem},
+            data: {page: page, not_in_item: notInItem},
             success: function (response) {
-                console.info(response)
                 cardItems.append(response.view)
                 renderVideo();
                 curPage++;
@@ -49,26 +49,31 @@ $(function () {
 
         $('.card-new').each(function (i, item) {
             var _this = $(item);
+            if(_this.hasClass('render-html')){
+                return ;
+            }
             var card = _this.find('.video-card')
-            _this.removeClass('card-new');
+            _this.addClass('render-html');
             notInItem.push(card.attr('id'))
-            console.info(card.attr('id'))
             card.css({'width': _this.outerWidth()});
             var video = new ZdVideo({
                 container: card.attr('id'),
-                source: card.attr('data-src'),
+                //source: card.attr('data-src'),
                 poster: card.attr('data-poster'),
                 width: parseInt(_this.outerWidth()),
                 height: 200,
                 clickFun: function () {
-                    console.info(video.video.src)
                     if (!video.video.src) {
-                        video.video.src = url;
+                        video.video.src = card.attr('data-src');
                         video.video.load();
                     }
                 },
                 playingFun: function () {
-                    //playingFun(video)
+
+                    if(curPlayVideo && curPlayVideo != video.video){
+                        curPlayVideo.pause();
+                    }
+                    curPlayVideo = video.video;
                 }
             });
         });
@@ -80,16 +85,6 @@ $(function () {
 
     // 加载flag
     var loading = false;
-    // 最多可加载的条目
-    var maxItems = 100;
-
-    // 每次加载添加多少条目
-    var itemsPerLoad = 20;
-
-
-    // 上次加载的序号
-
-    var lastIndex = 20;
 
     // 注册'infinite'事件处理函数
     $(document).on('infinite', '.infinite-scroll-bottom', function () {
@@ -121,7 +116,10 @@ $(function () {
             $.refreshScroller();
         }, 1000);
 
-    })
+    });
+
+
+    $.init();
 
 
 });

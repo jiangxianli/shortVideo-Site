@@ -17,7 +17,7 @@ class ShortVideo extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'url', 'poster', 'platform_id', 'platform_type', 'title'
+        'url', 'poster', 'platform_id', 'platform_type', 'title','random'
     ];
 
     /**

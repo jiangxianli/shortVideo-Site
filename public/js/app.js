@@ -1,13 +1,14 @@
-(function ($, root) {
+$(function () {
+    var root = this
     // init video object
     function ZdVideo(opts) {
         opts = opts || {};
         if (!opts.container || !$('#' + opts.container)) {
             throw new Error('video container not found!')
         }
-        if (!opts.source || opts.source.length == 0) {
-            throw new Error('no video source found!')
-        }
+        //if (!opts.source || opts.source.length == 0) {
+        //    throw new Error('no video source found!')
+        //}
         this.opts = opts;
         this.container = $('#' + this.opts.container); //jquery obj
         this.tpl = null;
@@ -46,13 +47,13 @@
         if (this.opts.poster) {
             tpl += ' poster=' + this.opts.poster;
         }
-        if (typeof this.opts.source === 'string') {
+        if (this.opts.source && typeof this.opts.source === 'string') {
             tpl += ' src=' + this.opts.source;
         }
 
         tpl += '>\n';
 
-        if (Array.isArray(this.opts.source) && this.opts.source.length > 0) {
+        if (this.opts.source && Array.isArray(this.opts.source) && this.opts.source.length > 0) {
             this.opts.source.forEach(function (item) {
                 tpl += '<source src=' + item + ' type=' + _getVideoType(item) + '/>\n';
             });
@@ -132,6 +133,9 @@
         obj.videoTime = obj.controls.find('.zd-video-time');
         //play
         var playHandle = function (e) {
+            if(self.opts.clickFun){
+                self.opts.clickFun(true)
+            }
             obj.video.play();
             obj.playBtn.addClass('hide');
             obj.pauseBtn.removeClass('hide');
@@ -168,6 +172,9 @@
             obj.playBtn.css('display', 'none');
             obj.pauseBtn.css('display', 'inline-block');
             obj.bigPlayBtn.addClass('hide');
+            if(self.opts.playingFun){
+                self.opts.playingFun(true);
+            }
         }, false);
 
         obj.video.addEventListener('pause', function () {
@@ -179,6 +186,9 @@
         }, false);
 
         obj.video.addEventListener('click', function () {
+            if(self.opts.clickFun){
+                self.opts.clickFun(true)
+            }
             if (obj.video.paused) {
                 obj.video.play();
             } else {
@@ -236,7 +246,7 @@
 
     root.ZdVideo = ZdVideo;
 
-})(jQuery, this);
+})
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -265,15 +275,15 @@ $(function () {
     var notInItem = Array();
     var cardItems = $('.card-items');
     var hasMore = true;
+    var curPlayVideo = null;
 
-    function getNormalList(curPage, notInItem) {
+    function getNormalList(page, notInItem) {
 
         $.ajax({
             url: '/normal-list',
             method: 'GET',
-            data: {page: curPage, not_in_item: notInItem},
+            data: {page: page, not_in_item: notInItem},
             success: function (response) {
-                console.info(response)
                 cardItems.append(response.view)
                 renderVideo();
                 curPage++;
@@ -289,26 +299,31 @@ $(function () {
 
         $('.card-new').each(function (i, item) {
             var _this = $(item);
+            if(_this.hasClass('render-html')){
+                return ;
+            }
             var card = _this.find('.video-card')
-            _this.removeClass('card-new');
+            _this.addClass('render-html');
             notInItem.push(card.attr('id'))
-            console.info(card.attr('id'))
             card.css({'width': _this.outerWidth()});
             var video = new ZdVideo({
                 container: card.attr('id'),
-                source: card.attr('data-src'),
+                //source: card.attr('data-src'),
                 poster: card.attr('data-poster'),
                 width: parseInt(_this.outerWidth()),
                 height: 200,
                 clickFun: function () {
-                    console.info(video.video.src)
                     if (!video.video.src) {
-                        video.video.src = url;
+                        video.video.src = card.attr('data-src');
                         video.video.load();
                     }
                 },
                 playingFun: function () {
-                    //playingFun(video)
+
+                    if(curPlayVideo && curPlayVideo != video.video){
+                        curPlayVideo.pause();
+                    }
+                    curPlayVideo = video.video;
                 }
             });
         });
@@ -320,16 +335,6 @@ $(function () {
 
     // 加载flag
     var loading = false;
-    // 最多可加载的条目
-    var maxItems = 100;
-
-    // 每次加载添加多少条目
-    var itemsPerLoad = 20;
-
-
-    // 上次加载的序号
-
-    var lastIndex = 20;
 
     // 注册'infinite'事件处理函数
     $(document).on('infinite', '.infinite-scroll-bottom', function () {
@@ -361,7 +366,10 @@ $(function () {
             $.refreshScroller();
         }, 1000);
 
-    })
+    });
+
+
+    $.init();
 
 
 });

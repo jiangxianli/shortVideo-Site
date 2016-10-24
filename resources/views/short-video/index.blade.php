@@ -8,14 +8,14 @@
         <div class="page page-current">
             <!-- 标题栏 -->
             <header class="bar bar-nav page-title">
-                <a class="icon icon-me pull-left open-panel"></a>
+                {{--<a class="icon icon-me pull-left open-panel"></a>--}}
                 <h1 class="title">小视频</h1>
             </header>
 
 
             <!-- 这里是页面内容区 -->
             <div class="content infinite-scroll infinite-scroll-bottom" data-distance="100">
-                <div class="content-block">
+                {{--<div class="content-block">--}}
 
 
                     <div class="card-items">
@@ -50,12 +50,13 @@
                         {{--</div>--}}
                     </div>
 
+                {{--</div>--}}
 
-                    <!-- 加载提示符 -->
-                    <div class="infinite-scroll-preloader">
-                        <div class="preloader"></div>
-                    </div>
 
+
+                <!-- 加载提示符 -->
+                <div class="infinite-scroll-preloader">
+                    <div class="preloader"></div>
                 </div>
             </div>
 
@@ -101,6 +102,6 @@
 
 @section('bottom-scripts')
     <script>
-        $.init();
+
     </script>
 @stop

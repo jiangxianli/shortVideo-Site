@@ -1,13 +1,14 @@
-(function ($, root) {
+$(function () {
+    var root = this
     // init video object
     function ZdVideo(opts) {
         opts = opts || {};
         if (!opts.container || !$('#' + opts.container)) {
             throw new Error('video container not found!')
         }
-        if (!opts.source || opts.source.length == 0) {
-            throw new Error('no video source found!')
-        }
+        //if (!opts.source || opts.source.length == 0) {
+        //    throw new Error('no video source found!')
+        //}
         this.opts = opts;
         this.container = $('#' + this.opts.container); //jquery obj
         this.tpl = null;
@@ -46,13 +47,13 @@
         if (this.opts.poster) {
             tpl += ' poster=' + this.opts.poster;
         }
-        if (typeof this.opts.source === 'string') {
+        if (this.opts.source && typeof this.opts.source === 'string') {
             tpl += ' src=' + this.opts.source;
         }
 
         tpl += '>\n';
 
-        if (Array.isArray(this.opts.source) && this.opts.source.length > 0) {
+        if (this.opts.source && Array.isArray(this.opts.source) && this.opts.source.length > 0) {
             this.opts.source.forEach(function (item) {
                 tpl += '<source src=' + item + ' type=' + _getVideoType(item) + '/>\n';
             });
@@ -132,6 +133,9 @@
         obj.videoTime = obj.controls.find('.zd-video-time');
         //play
         var playHandle = function (e) {
+            if(self.opts.clickFun){
+                self.opts.clickFun(true)
+            }
             obj.video.play();
             obj.playBtn.addClass('hide');
             obj.pauseBtn.removeClass('hide');
@@ -168,6 +172,9 @@
             obj.playBtn.css('display', 'none');
             obj.pauseBtn.css('display', 'inline-block');
             obj.bigPlayBtn.addClass('hide');
+            if(self.opts.playingFun){
+                self.opts.playingFun(true);
+            }
         }, false);
 
         obj.video.addEventListener('pause', function () {
@@ -179,6 +186,9 @@
         }, false);
 
         obj.video.addEventListener('click', function () {
+            if(self.opts.clickFun){
+                self.opts.clickFun(true)
+            }
             if (obj.video.paused) {
                 obj.video.play();
             } else {
@@ -236,4 +246,4 @@
 
     root.ZdVideo = ZdVideo;
 
-})(jQuery, this);
+})

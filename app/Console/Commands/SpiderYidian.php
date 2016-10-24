@@ -12,7 +12,7 @@ class SpiderYidian extends Command
      *
      * @var string
      */
-    protected $signature = 'command:spider-yi-dian {--init=}';
+    protected $signature = 'command:spider-yi-dian {--docid=}';
 
     /**
      * The console command description.
@@ -38,9 +38,10 @@ class SpiderYidian extends Command
      */
     public function handle()
     {
-        $init = $this->option('init');
-        if($init){
-            SpiderModule::spiderYidianItem('V_00TU5W5p');
+        $docid = $this->option('docid');
+        if($docid){
+            //V_00TU5W5p
+            SpiderModule::spiderYidianItem($docid);
         }else{
             SpiderModule::spiderLastestYidian();
         }
