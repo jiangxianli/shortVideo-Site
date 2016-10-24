@@ -12,16 +12,22 @@ namespace App\Http\Controllers;
 use App\Module\ShortVideoModule;
 use Illuminate\Http\Request;
 
-class ApiController extends Controller{
+class ApiController extends Controller
+{
 
 
-    public function getNormalList(Request $request){
+    public function getNormalList(Request $request)
+    {
 
-        $not_in_items = $request->get('not_in_items',[]);
+        $not_in_items = $request->get('not_in_items', []);
 
-        $items = ShortVideoModule::getNormalList($not_in_items,5);
+        $items = ShortVideoModule::getNormalList($not_in_items, 5);
 
-        return view('short-video._items',compact('items'))->render();
+        $view = view('short-video._items', compact('items'))->render();
+
+        $items         = $items->toArray();
+        $items['view'] = $view;
+        return $items;
 
     }
 }

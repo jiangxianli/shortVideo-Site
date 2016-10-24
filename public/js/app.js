@@ -264,6 +264,7 @@ $(function () {
     var curPage = 1;
     var notInItem = Array();
     var cardItems = $('.card-items');
+    var hasMore = true;
     function getNormalList(curPage,notInItem){
 
         $.ajax({
@@ -271,7 +272,7 @@ $(function () {
             method:'GET',
             data:{ page : curPage , not_in_item : notInItem},
             success:function(response){
-                cardItems.append(response)
+                cardItems.append(response.view)
                 renderVideo();
                 curPage++;
             }

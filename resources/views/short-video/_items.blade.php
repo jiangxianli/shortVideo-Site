@@ -17,8 +17,10 @@
         </div>
     </div>
     <div class="card-footer card-bottom">
-        <a class="tag-item">花絮片段</a>
-        <a class="tag-item">电视剧</a>
+        @foreach($item->tags as $tag)
+        <a class="tag-item">{{ $tag->name }}</a>
+        @endforeach
+
         <a href="#" class="link">
             <span class="icon icon-message"></span>
             12

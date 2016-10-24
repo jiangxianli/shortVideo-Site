@@ -24,41 +24,38 @@ $(function () {
     var curPage = 1;
     var notInItem = Array();
     var cardItems = $('.card-items');
-    function getNormalList(curPage,notInItem){
+    var hasMore = true;
+
+    function getNormalList(curPage, notInItem) {
 
         $.ajax({
-            url:'/normal-list',
-            method:'GET',
-            data:{ page : curPage , not_in_item : notInItem},
-            success:function(response){
-                cardItems.append(response)
+            url: '/normal-list',
+            method: 'GET',
+            data: {page: curPage, not_in_item: notInItem},
+            success: function (response) {
+                cardItems.append(response.view)
                 renderVideo();
                 curPage++;
             }
         })
     }
 
-    function renderVideo(){
+    //渲染视频
+    function renderVideo() {
 
         $('.card-new').each(function (i, item) {
             var _this = $(item);
             var card = _this.find('.video-card')
-            //if(_this.find('video')){
-            //    return ;
-            //}
             _this.removeClass('card-new');
             notInItem.push(card.attr('id'))
             console.info(card.attr('id'))
-            card.css({'width':_this.outerWidth()});
-            //console.info(cardHeadr.width())
-            //console.info(_this.attr('data-id'))
+            card.css({'width': _this.outerWidth()});
             var video = new ZdVideo({
                 container: card.attr('id'),
                 source: card.attr('data-src'),
                 poster: card.attr('data-poster'),
-                width : parseInt(_this.outerWidth()),
-                height:200,
-                //preload : true,
+                width: parseInt(_this.outerWidth()),
+                height: 200,
                 clickFun: function () {
                     console.info(video.video.src)
                     if (!video.video.src) {
@@ -74,7 +71,7 @@ $(function () {
 
     }
 
-    getNormalList(1,notInItem);
+    getNormalList(1, notInItem);
 
 
     // 加载flag
@@ -91,7 +88,7 @@ $(function () {
     var lastIndex = 20;
 
     // 注册'infinite'事件处理函数
-    $(document).on('infinite', '.infinite-scroll-bottom',function() {
+    $(document).on('infinite', '.infinite-scroll-bottom', function () {
 
         // 如果正在加载，则退出
         if (loading) return;

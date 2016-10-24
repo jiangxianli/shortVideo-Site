@@ -11,40 +11,42 @@
   background: #1193F5;
 }
 
-.video-card{
+.video-card {
   background: #000000;
-  height:auto;
+  height: auto;
   overflow: hidden;
   padding-bottom: 44px;
 }
-.video-title{
+
+.video-title {
   font-size: 0.6rem;
-  color:#333333;
-  .card-content-inner{
-    padding:0.3rem 0.5rem;
+  color: #333333;
+  .card-content-inner {
+    padding: 0.3rem 0.5rem;
   }
 }
-.tag-item{
+
+.tag-item {
   background: #d7d7d7;
-  font-size:0.5rem;
-  color:#000000;
+  font-size: 0.5rem;
+  color: #000000;
   border-radius: 2px;
-  height:1.2rem;
+  height: 1.2rem;
   line-height: 1.2rem;
-  padding:0.2rem;
-  margin-right:0.5rem;
+  padding: 0.2rem;
+  margin-right: 0.5rem;
   cursor: pointer;
 }
 
-.card-bottom{
-  width:100%;
+.card-bottom {
+  width: 100%;
   display: inline-block;
-  a.link{
+  a.link {
     display: inline-block;
-    float:right;
-    span.icon{
-      font-size:1.2rem;
-      margin-left:0.5rem;
+    float: right;
+    span.icon {
+      font-size: 1.2rem;
+      margin-left: 0.5rem;
     }
   }
 }
