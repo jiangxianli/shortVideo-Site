@@ -10,7 +10,7 @@
         <div class="page page-current">
             <!-- 标题栏 -->
             <header class="bar bar-nav page-title">
-                {{--<a class="icon icon-me pull-left open-panel"></a>--}}
+                <a class="icon icon-me pull-left open-panel"></a>
                 <h1 class="title">小视频</h1>
             </header>
 
@@ -87,7 +87,9 @@
         <div class="content-block">
             <p>这是一个侧栏</p>
 
-            <p></p>
+            <p>
+                <div class="ds-login"></div>
+            </p>
             <!-- Click on link with "close-panel" class will close panel -->
             <p><a href="#" class="close-panel">关闭</a></p>
         </div>

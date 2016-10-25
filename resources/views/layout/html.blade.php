@@ -29,5 +29,23 @@
     <script type="text/javascript" src="/js/app.js"></script>
 
     @yield('bottom-scripts')
+
+    <script>
+        var duoshuoQuery = {
+            short_name:"jiangxianli",
+            sso: {
+                login: "{{ route('login') }}",//替换为你自己的回调地址
+                logout: "{{ route('logout') }}"//替换为你自己的回调地址
+            }
+        };
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
 </body>
 </html>
