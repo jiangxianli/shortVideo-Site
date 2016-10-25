@@ -1,5 +1,5 @@
 @foreach($items as $item)
-<div class="card demo-card-header-pic card-new">
+<div class="card demo-card-header-pic card-new" render-html="false">
     <div valign="bottom" class="card-header color-white no-border no-padding">
 
         <div class="video-card"

@@ -17,9 +17,7 @@
 
             <!-- 这里是页面内容区 -->
             <div class="content infinite-scroll infinite-scroll-bottom" data-distance="100">
-                {{--<div class="content-block">--}}
-
-
+                <div class="content-block">
                     <div class="card-items">
 
                         {{--<div class="card demo-card-header-pic">--}}
@@ -52,9 +50,7 @@
                         {{--</div>--}}
                     </div>
 
-                {{--</div>--}}
-
-
+                </div>
 
                 <!-- 加载提示符 -->
                 <div class="infinite-scroll-preloader">

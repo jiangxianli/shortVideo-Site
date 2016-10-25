@@ -47,13 +47,13 @@ $(function () {
     //渲染视频
     function renderVideo() {
 
-        $('.card-new').each(function (i, item) {
+        $('.card-new[render-html=false]').each(function (i, item) {
             var _this = $(item);
-            if(_this.hasClass('render-html')){
+            if(_this.attr('render-html') == false){
                 return ;
             }
             var card = _this.find('.video-card')
-            _this.addClass('render-html');
+            _this.removeAttr('render-html');
             notInItem.push(card.attr('id'))
             card.css({'width': _this.outerWidth()});
             var video = new ZdVideo({
