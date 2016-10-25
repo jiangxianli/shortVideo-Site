@@ -13,11 +13,13 @@ class ShortVideoFactory
         return new ShortVideo();
     }
 
-    public static function tagModel(){
+    public static function tagModel()
+    {
         return new Tag();
     }
 
-    public static function shortVideoTagModel(){
+    public static function shortVideoTagModel()
+    {
 
         return new ShortVideoTag();
     }
@@ -34,6 +36,10 @@ class ShortVideoFactory
 
         if ($default_relation = array_get($condition, 'default_relation', [])) {
             $builder = $builder->with($default_relation);
+        }
+
+        if ($id = array_get($condition, 'id', [])) {
+            $builder = $builder->where('id', $id);
         }
 
         if ($status = array_get($condition, 'status', [])) {

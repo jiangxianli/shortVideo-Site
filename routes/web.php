@@ -16,5 +16,6 @@ Route::get('/', function () {
 });
 
 Route::get('/normal-list','ApiController@getNormalList');
+Route::get('/detail/{id}','ShortVideoController@getDetail');
 Route::get('/login','UserController@getLogin');
 Route::get('/logout','UserController@getLogout');

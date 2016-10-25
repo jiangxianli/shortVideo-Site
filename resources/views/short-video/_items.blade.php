@@ -11,9 +11,9 @@
     </div>
     <div class="card-content video-title">
         <div class="card-content-inner">
-            <p class="">
+            <a href="javascript:void(0)" class="card-detail" data-href="{{ action('ShortVideoController@getDetail',['id' => $item->id ]) }}"  >
                 {{ $item->title }}
-            </p>
+            </a>
         </div>
     </div>
     <div class="card-footer card-bottom">

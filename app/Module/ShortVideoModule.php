@@ -21,7 +21,23 @@ class ShortVideoModule
             ]
         ]);
 
-        return $short_video->orderBy('random','desc')->paginate($per_page);
+        return $short_video->orderBy('random', 'desc')->paginate($per_page);
+    }
+
+
+    public static function getNormalDetail($id)
+    {
+        $short_video = ShortVideoFactory::shortVideoSearch([
+            'default_relation' => [
+                'tags' => function () {
+
+                }
+            ],
+            'id'               => $id
+        ]);
+
+        return $short_video->first();
+
     }
 
 }
