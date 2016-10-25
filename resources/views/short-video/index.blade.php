@@ -87,9 +87,14 @@
         <div class="content-block">
             <p>这是一个侧栏</p>
 
-            <p>
+            @if(\Auth::check())
+                {{ \Auth::user()->nick_name }}
+            @else
+
+                <p>
                 <div class="ds-login"></div>
-            </p>
+                </p>
+            @endif
             <!-- Click on link with "close-panel" class will close panel -->
             <p><a href="#" class="close-panel">关闭</a></p>
         </div>

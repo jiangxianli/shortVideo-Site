@@ -36,13 +36,29 @@ class DuoShuoClient
 
         $url = 'http://api.duoshuo.com/oauth2/access_token';
 
-        $reponse = CURL::post($url, [
+        $response = CURL::post($url, [
             'code'      => $code,
-            'client_id' => ''
+            'client_id' => 'jiangxianli'
         ]);
+        $response =  json_decode($response, true);
 
-        \Log::info($reponse);
-        return $reponse;
+        return $response;
+
+    }
+
+
+    public static function getUserInfo($user_id)
+    {
+        $url      = 'http://api.duoshuo.com/users/profile.json?user_id=' . $user_id;
+        $response = CURL::get($url);
+        $response = (array)json_decode($response, true);
+        if($response && $response['code'] == 0){
+
+            return $response['response'];
+        }
+
+        return $response;
+
 
     }
 
