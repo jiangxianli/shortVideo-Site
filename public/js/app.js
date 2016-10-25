@@ -368,6 +368,10 @@ $(function () {
 
     });
 
+    $(document).on('click','a.card-detail',function(){
+        $.router.load($(this).attr('data-href'));
+    })
+
 
     $.init();
 
