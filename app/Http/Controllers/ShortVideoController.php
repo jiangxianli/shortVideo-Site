@@ -19,9 +19,9 @@ class ShortVideoController extends Controller
     public function getDetail(Request $request, $id)
     {
 
-        $items = ShortVideoModule::getNormalDetail($id);
+        $item = ShortVideoModule::getNormalDetail($id);
 
-        return view('short-video.detail', compact('items'));
+        return view('short-video.detail', compact('item'));
 
     }
 }
