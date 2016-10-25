@@ -7,7 +7,7 @@
     <title>@yield('title')</title>
 
     <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/app.css?t={{ time() }}">
     <link rel="stylesheet" type="text/css" href="http://www.helloweba.com/demo/css/main.css" />
 
 
@@ -22,11 +22,13 @@
 <body>
     @yield('body')
 
+    @include('layout.side-bar')
+
     {{--<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>--}}
     <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
     {{--<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/??sm.min.js,sm-extend.min.js' charset='utf-8'></script>--}}
-    <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript" src="/js/app.js?t={{ time() }}"></script>
 
     @yield('bottom-scripts')
 

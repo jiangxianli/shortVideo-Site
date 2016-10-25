@@ -17,7 +17,7 @@
 
             <!-- 这里是页面内容区 -->
             <div class="content infinite-scroll infinite-scroll-bottom" data-distance="100">
-                <div class="content-block">
+                <div class="content-block card-items-block">
                     <div class="card-items">
 
                         {{--<div class="card demo-card-header-pic">--}}
@@ -82,26 +82,6 @@
 
     <!-- popup, panel 等放在这里 -->
     <div class="panel-overlay"></div>
-    <!-- Left Panel with Reveal effect -->
-    <div class="panel panel-left panel-reveal">
-        <div class="content-block">
-            <p>这是一个侧栏</p>
-
-            @if(\Auth::check())
-                {{ \Auth::user()->nick_name }}
-            @else
-
-                <p>
-                <div class="ds-login"></div>
-                </p>
-            @endif
-            <!-- Click on link with "close-panel" class will close panel -->
-            <p><a href="#" class="close-panel">关闭</a></p>
-        </div>
-    </div>
-
-
-
 
 @stop
 

@@ -11,25 +11,47 @@
             <!-- 标题栏 -->
             <header class="bar bar-nav page-title">
                 <a class="icon icon-me pull-left open-panel"></a>
-                <h1 class="title">{{ $item->title }}</h1>
+                <h1 class="title">详情</h1>
             </header>
-
 
             <!-- 这里是页面内容区 -->
             <div class="content">
-                <div class="card-new">
-                    <div class="video-card"
-                         id="{{ $item->id }}"
-                         data-poster="{{  $item->poster }}"
-                         data-src="{{$item->url }}"
-                    >
+                <div class="card demo-card-header-pic card-new" render-html="true">
+                    <div valign="bottom" class="card-header color-white no-border no-padding">
+
+                        <div class="video-card"
+                             id="{{ $item->id }}"
+                             data-poster="{{  $item->poster }}"
+                             data-src="{{$item->url }}"
+                             data-title="{{$item->title }}"
+                                >
+                        </div>
+                    </div>
+                    <div class="card-content video-title">
+                        <div class="card-content-inner">
+                                {{ $item->title }}
+                        </div>
+                    </div>
+                    <div class="card-footer card-bottom">
+                        @foreach($item->tags as $tag)
+                            <a class="tag-item">{{ $tag->name }}</a>
+                        @endforeach
+
+                        {{--<a href="#" class="link">--}}
+                            {{--<span class="icon icon-message"></span>--}}
+                            {{--12--}}
+                        {{--</a>--}}
+                        {{--<a href="#" class="link">--}}
+                            {{--<span class="icon icon-star"></span>--}}
+                            {{--12--}}
+                        </a>
                     </div>
                 </div>
-                <p class="">
-                    {{ $item->title }}
-                </p>
 
-                <div class="ds-thread" data-thread-key="{{ $item->id }}" data-title="{{ $item->title }}" data-url="{{ action('ShortVideoController@getDetail',['id'=>$item->id]) }}"></div>
+                <div style="width:95%;margin:0 auto;">
+                    <div class="ds-thread" data-thread-key="{{ $item->id }}" data-title="{{ $item->title }}" data-url="{{ action('ShortVideoController@getDetail',['id'=>$item->id]) }}"></div>
+                </div>
+
             </div>
 
         </div>
@@ -37,26 +59,6 @@
 
     <!-- popup, panel 等放在这里 -->
     <div class="panel-overlay"></div>
-    <!-- Left Panel with Reveal effect -->
-    <div class="panel panel-left panel-reveal">
-        <div class="content-block">
-            <p>这是一个侧栏</p>
-
-            @if(\Auth::check())
-                {{ \Auth::user()->nick_name }}
-            @else
-
-                <p>
-                <div class="ds-login"></div>
-                </p>
-            @endif
-            <!-- Click on link with "close-panel" class will close panel -->
-            <p><a href="#" class="close-panel">关闭</a></p>
-        </div>
-    </div>
-
-
-
 
 @stop
 

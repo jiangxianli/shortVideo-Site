@@ -1,11 +1,12 @@
 @foreach($items as $item)
-<div class="card demo-card-header-pic card-new" render-html="false">
+<div class="card demo-card-header-pic card-new" render-html="true">
     <div valign="bottom" class="card-header color-white no-border no-padding">
 
         <div class="video-card"
              id="{{ $item->id }}"
              data-poster="{{  $item->poster }}"
              data-src="{{$item->url }}"
+             data-title="{{$item->title }}"
                 >
         </div>
     </div>
@@ -21,7 +22,10 @@
         <a class="tag-item">{{ $tag->name }}</a>
         @endforeach
 
-        <a href="#" class="link">
+        <a  class="link "
+            data-no-cache="true"
+            external
+            href="{{ action('ShortVideoController@getDetail',['id' => $item->id ]) }}">
             <span class="icon icon-message"></span>
             12
         </a>

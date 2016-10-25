@@ -47,6 +47,9 @@ $(function () {
         if (this.opts.poster) {
             tpl += ' poster=' + this.opts.poster;
         }
+        if (this.opts.title) {
+            tpl += ' title=' + this.opts.title;
+        }
         if (this.opts.source && typeof this.opts.source === 'string') {
             tpl += ' src=' + this.opts.source;
         }
@@ -60,8 +63,9 @@ $(function () {
         }
         tpl += '</video>\n';
 
-        //add controls
-        tpl += '<div class="zd-video-controls">\
+        if (this.opts.control) {
+            //add controls
+            tpl += '<div class="zd-video-controls">\
                 <div class="zd-video-progress">\
                   <div class="zd-video-progress-bar"></div>\
                 </div>\
@@ -80,6 +84,8 @@ $(function () {
                   </div>\
                 </div>\
               </div>';
+        }
+
         tpl += '</div>';
 
         this.container.append($(tpl));
@@ -293,39 +299,40 @@ $(function () {
             }
         })
     }
-
+    renderVideo();
     //渲染视频
     function renderVideo() {
-
-        $('.card-new[render-html=false]').each(function (i, item) {
+        $('.card-new').each(function (i, item) {
             var _this = $(item);
-            if(_this.attr('render-html') == false){
-                return ;
-            }
-            var card = _this.find('.video-card')
-            _this.removeAttr('render-html');
-            notInItem.push(card.attr('id'))
-            card.css({'width': _this.outerWidth()});
-            var video = new ZdVideo({
-                container: card.attr('id'),
-                //source: card.attr('data-src'),
-                poster: card.attr('data-poster'),
-                width: parseInt(_this.outerWidth()),
-                height: 200,
-                clickFun: function () {
-                    if (!video.video.src) {
-                        video.video.src = card.attr('data-src');
-                        video.video.load();
-                    }
-                },
-                playingFun: function () {
+            console.info(_this.find('video').length)
+            if(_this.find('video').length == 0){
+                var card = _this.find('.video-card')
+                _this.removeAttr('render-html');
+                notInItem.push(card.attr('id'))
+                card.css({'width': _this.outerWidth()});
+                var video = new ZdVideo({
+                    container: card.attr('id'),
+                    //source: card.attr('data-src'),
+                    poster: card.attr('data-poster'),
+                    title: card.attr('data-title'),
+                    width: parseInt(_this.outerWidth()),
+                    height: 200,
+                    clickFun: function () {
+                        if (!video.video.src) {
+                            video.video.src = card.attr('data-src');
+                            video.video.load();
+                        }
+                    },
+                    playingFun: function () {
 
-                    if(curPlayVideo && curPlayVideo != video.video){
-                        curPlayVideo.pause();
+                        if(curPlayVideo && curPlayVideo != video.video){
+                            curPlayVideo.pause();
+                        }
+                        curPlayVideo = video.video;
                     }
-                    curPlayVideo = video.video;
-                }
-            });
+                });
+            }
+
         });
 
     }

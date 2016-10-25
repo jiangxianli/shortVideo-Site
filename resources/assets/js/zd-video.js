@@ -47,6 +47,9 @@ $(function () {
         if (this.opts.poster) {
             tpl += ' poster=' + this.opts.poster;
         }
+        if (this.opts.title) {
+            tpl += ' title=' + this.opts.title;
+        }
         if (this.opts.source && typeof this.opts.source === 'string') {
             tpl += ' src=' + this.opts.source;
         }
@@ -60,8 +63,9 @@ $(function () {
         }
         tpl += '</video>\n';
 
-        //add controls
-        tpl += '<div class="zd-video-controls">\
+        if (this.opts.control) {
+            //add controls
+            tpl += '<div class="zd-video-controls">\
                 <div class="zd-video-progress">\
                   <div class="zd-video-progress-bar"></div>\
                 </div>\
@@ -80,6 +84,8 @@ $(function () {
                   </div>\
                 </div>\
               </div>';
+        }
+
         tpl += '</div>';
 
         this.container.append($(tpl));

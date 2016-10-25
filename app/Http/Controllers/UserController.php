@@ -18,6 +18,11 @@ class UserController extends Controller
 {
 
 
+    public function getLoginPage()
+    {
+        return view('login');
+    }
+
     public function getLogin(Request $request)
     {
         $response = DuoShuoClient::getAccessToken($request->get('code'));
@@ -26,10 +31,10 @@ class UserController extends Controller
         if (!$user) {
             $user_info = DuoShuoClient::getUserInfo($response['user_id']);
 
-            $arr  = [
-                'nick_name'     => $user_info['name'],
-                'image_url'     => $user_info['avatar_url'],
-                'duo_shuo_id'   => $user_info['user_id'],
+            $arr = [
+                'nick_name' => $user_info['name'],
+                'image_url' => $user_info['avatar_url'],
+                'duo_shuo_id' => $user_info['user_id'],
                 'duo_shuo_info' => json_encode($user_info),
             ];
             $user = UserFactory::createUser($arr);
