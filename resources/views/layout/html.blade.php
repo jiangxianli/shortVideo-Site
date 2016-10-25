@@ -34,8 +34,8 @@
         var duoshuoQuery = {
             short_name:"jiangxianli",
             sso: {
-                login: "{{ route('login') }}",//替换为你自己的回调地址
-                logout: "{{ route('logout') }}"//替换为你自己的回调地址
+                login: "{{ action('UserController@getLogin') }}",//替换为你自己的回调地址
+                logout: "{{ action('UserController@getLogout') }}"//替换为你自己的回调地址
             }
         };
         (function() {
