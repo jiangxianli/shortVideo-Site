@@ -14,40 +14,11 @@
                 <h1 class="title">小视频</h1>
             </header>
 
-
             <!-- 这里是页面内容区 -->
             <div class="content infinite-scroll infinite-scroll-bottom" data-distance="100">
                 <div class="content-block card-items-block">
                     <div class="card-items">
 
-                        {{--<div class="card demo-card-header-pic">--}}
-                            {{--<div valign="bottom" class="card-header color-white no-border no-padding">--}}
-
-                                {{--<div class="video-card"--}}
-                                     {{--id="video-card1"--}}
-                                     {{--data-poster="http://d.ifengimg.com/w480_h360/p0.ifengimg.com/pmop/2016/10/21/c08754b1-2a85-414a-a631-f3e5024978b0.jpg"--}}
-                                     {{--data-src="http://ips.ifeng.com/video19.ifeng.com/video09/2016/10/21/4313976-280-100-1549.mp4?unlimit=1"--}}
-                                        {{-->--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="card-content video-title">--}}
-                                {{--<div class="card-content-inner">--}}
-                                    {{--<p class="">有视频！妻子偷情被抓现行 丈夫当街暴打“男小三”</p>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="card-footer card-bottom">--}}
-                                {{--<a class="tag-item">花絮片段</a>--}}
-                                {{--<a class="tag-item">电视剧</a>--}}
-                                {{--<a href="#" class="link">--}}
-                                    {{--<span class="icon icon-message"></span>--}}
-                                    {{--12--}}
-                                {{--</a>--}}
-                                {{--<a href="#" class="link">--}}
-                                    {{--<span class="icon icon-star"></span>--}}
-                                    {{--12--}}
-                                {{--</a>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
                     </div>
 
                 </div>
@@ -87,10 +58,6 @@
 
 @section('bottom-scripts')
     <script>
-        $(function(){
-            var url = '/normal-list';
-//            $.shortVideo.getNormalList(url,1, $.shortVideo.notInItem);
 
-        })
     </script>
 @stop

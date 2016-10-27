@@ -277,6 +277,24 @@ $(function () {
 
 $(function () {
 
+
+    jquery.extend({
+        pageParams:{
+            curPage :1 ,
+            notInItem : Array(),
+            cardItems : $('.card-items'),
+            hasMore : true,
+            curPlayVideo : null
+        },
+        test:function(){
+            console.info(jquery.pageParams.hasMore)
+        }
+
+    });
+
+    jquery.test();
+
+    //return ;
     var curPage = 1;
     var notInItem = Array();
     var cardItems = $('.card-items');

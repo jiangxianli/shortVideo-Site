@@ -56,6 +56,12 @@ class ShortVideoFactory
             }
         }
 
+        if ($not_in_items = array_get($condition, 'in_items', [])) {
+            foreach ($not_in_items as $column => $value) {
+                $builder = $builder->whereIn($column, $value);
+            }
+        }
+
         return $builder;
 
     }

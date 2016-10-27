@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Cache;
 class SpiderModule
 {
 
+    /**
+     * 抓取单个一点视频
+     *
+     * @param $platform_id
+     * @param int $count
+     * @author  jiangxianli
+     * @created_at 2016-10-27 18:41:20
+     */
     public static function spiderYidianItem($platform_id, $count = 0)
     {
         //http://124.243.203.100/Website/contents/content?docid=V_00TU5W5p&version=020109
@@ -82,15 +90,11 @@ class SpiderModule
 
                 sleep(1);
 
-
             }
-
-
         }
 
 
     }
-
 
     public static function spiderLastestYidian()
     {

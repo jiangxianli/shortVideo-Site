@@ -21,6 +21,40 @@
 
 $(function () {
 
+
+    jquery.extend({
+        pageParams: {
+            curPage: 1,
+            notInItem: Array(),
+            cardItems: $('.card-items'),
+            hasMore: true,
+            curPlayVideo: null
+        },
+        test: function () {
+            console.info(jquery.pageParams.hasMore)
+        },
+        getNormalList: function getNormalList(page, notInItem) {
+
+            $.ajax({
+                url: '/normal-list',
+                method: 'GET',
+                data: {page: page, not_in_item: notInItem},
+                success: function (response) {
+                    jquery.pageParams.cardItems.append(response.view)
+                    renderVideo();
+                    jquery.pageParams.curPage++;
+                    if (response.current_page == response.last_page) {
+                        jquery.pageParams.hasMore = false;
+                    }
+                }
+            })
+        }
+
+    });
+
+    jquery.test();
+
+    //return ;
     var curPage = 1;
     var notInItem = Array();
     var cardItems = $('.card-items');
@@ -37,19 +71,20 @@ $(function () {
                 cardItems.append(response.view)
                 renderVideo();
                 curPage++;
-                if(response.current_page == response.last_page){
+                if (response.current_page == response.last_page) {
                     hasMore = false;
                 }
             }
         })
     }
+
     renderVideo();
     //渲染视频
     function renderVideo() {
         $('.card-new').each(function (i, item) {
             var _this = $(item);
             console.info(_this.find('video').length)
-            if(_this.find('video').length == 0){
+            if (_this.find('video').length == 0) {
                 var card = _this.find('.video-card')
                 _this.removeAttr('render-html');
                 notInItem.push(card.attr('id'))
@@ -69,7 +104,7 @@ $(function () {
                     },
                     playingFun: function () {
 
-                        if(curPlayVideo && curPlayVideo != video.video){
+                        if (curPlayVideo && curPlayVideo != video.video) {
                             curPlayVideo.pause();
                         }
                         curPlayVideo = video.video;
@@ -119,7 +154,7 @@ $(function () {
 
     });
 
-    $(document).on('click','a.card-detail',function(){
+    $(document).on('click', 'a.card-detail', function () {
         $.router.load($(this).attr('data-href'));
     })
 
