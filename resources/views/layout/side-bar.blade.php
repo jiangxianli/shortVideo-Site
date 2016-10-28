@@ -26,7 +26,9 @@
                 <a href="">我的收藏</a>
             </li>
             <li>
-                <a href="">历史观看</a>
+                <a data-no-cache="true"
+                   class="close-panel"
+                   href="/watch-history">历史观看</a>
             </li>
             <li>
                 <a data-no-cache="true"
@@ -38,7 +40,7 @@
         </ul>
 
 
-                    <!-- Click on link with "close-panel" class will close panel -->
-            {{--<p><a href="#" class="close-panel">关闭</a></p>--}}
+        <!-- Click on link with "close-panel" class will close panel -->
+        {{--<p><a href="#" class="close-panel">关闭</a></p>--}}
     </div>
 </div>

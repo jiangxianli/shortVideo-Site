@@ -58,6 +58,16 @@
 
 @section('bottom-scripts')
     <script>
+        $(function(){
+            var url = '/watch-list';
+            var svs = $$.svs();
+            var params = {page: svs.getDefault().page, not_in_item: svs.getDefault.notItem,in_items:svs.getWatchCache()}
+            svs.getNormalList(url,'POST',params );
+            svs.initScroll(function () {
+                params = {page: svs.getDefault().page, not_in_item: svs.getDefault.notItem,in_items:svs.getWatchCache()}
+                svs.getNormalList(url,'POST',params );
+            });
 
+        })
     </script>
 @stop

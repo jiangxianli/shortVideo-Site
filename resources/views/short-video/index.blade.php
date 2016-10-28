@@ -91,6 +91,14 @@
             var url = '/normal-list';
 //            $.shortVideo.getNormalList(url,1, $.shortVideo.notInItem);
 
+            var svs = $$.svs();
+            var params = {page: svs.getDefault().page, not_in_item: svs.getDefault.notItem}
+            svs.getNormalList(url,'GET',params );
+            svs.initScroll(function () {
+                 params = {page: svs.getDefault().page, not_in_item: svs.getDefault.notItem}
+                svs.getNormalList(url,'GET',params );
+            });
+
         })
     </script>
 @stop

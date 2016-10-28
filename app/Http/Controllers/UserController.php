@@ -80,9 +80,15 @@ class UserController extends Controller
     public function getWatchList(Request $request)
     {
         $in_items = $request->get('in_items', []);
+        $not_in_items = $request->get('not_in_items', []);
 
-        $item = ShortVideoModule::getWatchList($in_items, 5);
+        $item = ShortVideoModule::getWatchList($not_in_items,$in_items, 5);
 
         return view('short-video.detail', compact('item'));
+    }
+
+    public function getWatchHistoryPage()
+    {
+        return view('user.watch-history');
     }
 }

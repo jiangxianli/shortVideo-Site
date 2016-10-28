@@ -62,13 +62,16 @@ class ShortVideoModule
      * @author  jiangxianli
      * @created_at 2016-10-27 18:55:30
      */
-    public static function getWatchList($in_items, $per_page)
+    public static function getWatchList($not_in_items,$in_items, $per_page)
     {
         $short_video = ShortVideoFactory::shortVideoSearch([
             'default_relation' => [
                 'tags' => function () {
 
                 }
+            ],
+            'not_in_items'         => [
+                'id' => $not_in_items
             ],
             'in_items'         => [
                 'id' => $in_items

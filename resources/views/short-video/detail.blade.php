@@ -64,6 +64,9 @@
 
 @section('bottom-scripts')
     <script>
-
+        $(function(){
+            var svs = $$.svs();
+            svs.renderHtml();
+        })
     </script>
 @stop
