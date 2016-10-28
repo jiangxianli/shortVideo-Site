@@ -189,6 +189,7 @@ $(function () {
             obj.pauseBtn.css('display', 'none');
             obj.playBtn.css('display', 'inline-block');
             obj.bigPlayBtn.removeClass('hide');
+            obj.video.css({'position':'relative'})
         }, false);
 
         obj.video.addEventListener('click', function () {
