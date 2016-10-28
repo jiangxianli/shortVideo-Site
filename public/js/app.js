@@ -54,7 +54,7 @@ $(function () {
             tpl += ' src=' + this.opts.source;
         }
 
-        tpl += '>\n';
+        tpl += ' webkit-playsinline >\n';
 
         if (this.opts.source && Array.isArray(this.opts.source) && this.opts.source.length > 0) {
             this.opts.source.forEach(function (item) {
