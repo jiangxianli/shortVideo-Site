@@ -7,31 +7,39 @@
              data-poster="{{  $item->poster }}"
              data-src="{{$item->url }}"
              data-title="{{$item->title }}"
+             data-click-count-url="{{ action('ShortVideoController@postClickCount',['id'=>$item->id]) }}"
                 >
         </div>
     </div>
     <div class="card-content video-title">
         <div class="card-content-inner">
-            <a href="javascript:void(0)" class="card-detail" data-href="{{ action('ShortVideoController@getDetail',['id' => $item->id ]) }}"  >
+            <a
+               {{--href="javascript:void(0)" --}}
+               class="card-detail"
+               external
+               href="{{ action('ShortVideoController@getDetail',['id' => $item->id ]) }}"  >
                 {{ $item->title }}
             </a>
         </div>
     </div>
     <div class="card-footer card-bottom">
-        @foreach($item->tags as $tag)
-        <a class="tag-item">{{ $tag->name }}</a>
-        @endforeach
+
+        <div class="tags">
+            @foreach($item->tags as $tag)
+                <a class="tag-item" external href="{{ action('TagController@getTagDetail',['id'=>$tag->id]) }}">{{ $tag->name }}</a>
+            @endforeach
+        </div>
 
         <a  class="link "
             data-no-cache="true"
             external
             href="{{ action('ShortVideoController@getDetail',['id' => $item->id ]) }}">
-            <span class="icon icon-message"></span>
+            <span class="fa fa-comment-o"></span>
             12
         </a>
         <a href="#" class="link">
-            <span class="icon icon-star"></span>
-            12
+            <span class=" fa fa-eye"></span>
+            {{ $item->click_count }}
         </a>
     </div>
 </div>

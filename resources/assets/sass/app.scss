@@ -15,10 +15,16 @@
     color:#FFFFFF;
     font-size:1.2rem;
   }
-  .icon-me{
+  .icon-me,.icon-app{
     color:#ffffff;
     font-size: 1.7rem;
     text-decoration: none;
+  }
+  .icon-left{
+    color:#ffffff;
+    font-size: 1.5rem;
+    text-decoration: none;
+    margin-left:-0.3rem;
   }
 }
 
@@ -47,16 +53,30 @@
   padding: 0.2rem;
   margin-right: 0.5rem;
   cursor: pointer;
+  display: inline-block;
+  margin-bottom: 0.4rem;
 }
 
 .card-bottom {
   width: 100%;
   display: inline-block;
+  .tags{
+    width:70%;
+    height:1.6rem;
+    display: inline-block;
+    overflow: hidden;
+  }
   a.link {
     display: inline-block;
     float: right;
     span.icon {
       font-size: 1.2rem;
+      margin-left: 0.5rem;
+    }
+    span.fa{
+      font-size:1.2rem;
+      height:2.2rem;
+      line-height: 2.2rem;
       margin-left: 0.5rem;
     }
   }
@@ -125,5 +145,17 @@
   }
   .ds-login{
     margin:0 auto;
+  }
+}
+
+.tag-items{
+  width:94%;
+  margin:0rem auto;
+  height:auto;
+  background: #ffffff;
+  li{
+    display: inline-block;
+    margin-top:0.4rem
+
   }
 }

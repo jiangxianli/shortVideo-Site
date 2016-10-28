@@ -7,7 +7,9 @@
     <title>@yield('title')</title>
 
     <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/app.css?t={{ time() }}">
+
     <link rel="stylesheet" type="text/css" href="http://www.helloweba.com/demo/css/main.css" />
 
 

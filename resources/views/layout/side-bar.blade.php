@@ -23,7 +23,9 @@
                    href="/">热门推荐</a>
             </li>
             <li>
-                <a href="">我的收藏</a>
+                <a data-no-cache="true"
+                   class="close-panel"
+                   href="/tags">标签库</a>
             </li>
             <li>
                 <a data-no-cache="true"

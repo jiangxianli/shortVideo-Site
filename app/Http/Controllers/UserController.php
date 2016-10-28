@@ -82,9 +82,14 @@ class UserController extends Controller
         $in_items = $request->get('in_items', []);
         $not_in_items = $request->get('not_in_items', []);
 
-        $item = ShortVideoModule::getWatchList($not_in_items,$in_items, 5);
+        $items = ShortVideoModule::getWatchList($not_in_items,$in_items, 5);
 
-        return view('short-video.detail', compact('item'));
+        //视频列表渲染
+        $view = view('short-video._items', compact('items'))->render();
+
+        $items         = $items->toArray();
+        $items['view'] = $view;
+        return $items;
     }
 
     public function getWatchHistoryPage()

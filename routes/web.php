@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('short-video.index');
 });
 
-Route::get('/normal-list','ApiController@getNormalList');
+Route::post('/normal-list','ApiController@getNormalList');
 Route::get('/detail/{id}','ShortVideoController@getDetail');
 
 Route::get('/watch-history','UserController@getWatchHistoryPage');
@@ -23,3 +23,14 @@ Route::post('/watch-list','UserController@getWatchList');
 Route::get('/login','UserController@getLogin');
 Route::get('/logout','UserController@getLogout');
 Route::get('/login-page','UserController@getLoginPage');
+
+
+Route::get('/tags','TagController@getTagPage');
+Route::post('/tag-list','TagController@getTagList');
+
+
+Route::get('/tag/{id}','TagController@getTagDetail');
+
+Route::post('/tag/{id}/items','TagController@getTagVideoList');
+
+Route::get('/click-count/{id}','ShortVideoController@postClickCount');

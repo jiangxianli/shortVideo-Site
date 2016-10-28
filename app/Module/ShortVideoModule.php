@@ -22,7 +22,7 @@ class ShortVideoModule
 
                 }
             ],
-            'not_in_items'     => [
+            'not_in_items' => [
                 'id' => $not_in_items
             ]
         ]);
@@ -46,7 +46,7 @@ class ShortVideoModule
 
                 }
             ],
-            'id'               => $id
+            'id' => $id
         ]);
 
         return $short_video->first();
@@ -62,7 +62,7 @@ class ShortVideoModule
      * @author  jiangxianli
      * @created_at 2016-10-27 18:55:30
      */
-    public static function getWatchList($not_in_items,$in_items, $per_page)
+    public static function getWatchList($not_in_items, $in_items, $per_page)
     {
         $short_video = ShortVideoFactory::shortVideoSearch([
             'default_relation' => [
@@ -70,15 +70,25 @@ class ShortVideoModule
 
                 }
             ],
-            'not_in_items'         => [
+            'not_in_items' => [
                 'id' => $not_in_items
             ],
-            'in_items'         => [
+            'in_items' => [
                 'id' => $in_items
             ]
         ]);
 
         return $short_video->paginate($per_page);
+    }
+
+    public static function incrementClickCount($id)
+    {
+        $item = ShortVideoFactory::shortVideoSearch([
+            'id' => $id
+        ])->first();
+        if ($item) {
+            $item->increment('click_count');
+        }
     }
 
 }

@@ -12,6 +12,7 @@
             <header class="bar bar-nav page-title">
                 <a class="icon icon-me pull-left open-panel"></a>
                 <h1 class="title">小视频</h1>
+                <a class="icon icon-app pull-right" href="{{ action('TagController@getTagPage') }}" external></a>
             </header>
 
 
@@ -87,16 +88,14 @@
 
 @section('bottom-scripts')
     <script>
-        $(function(){
+        $(function () {
             var url = '/normal-list';
-//            $.shortVideo.getNormalList(url,1, $.shortVideo.notInItem);
-
             var svs = $$.svs();
-            var params = {page: svs.getDefault().page, not_in_item: svs.getDefault.notItem}
-            svs.getNormalList(url,'GET',params );
+            var params = {_token:"{{ csrf_token() }}",page: svs.getDefault().curPage, not_in_item: svs.getDefault().notInItem}
+            svs.getNormalList(url, 'POST', params);
             svs.initScroll(function () {
-                 params = {page: svs.getDefault().page, not_in_item: svs.getDefault.notItem}
-                svs.getNormalList(url,'GET',params );
+                params = {_token:"{{ csrf_token() }}",page: svs.getDefault().curPage, not_in_item: svs.getDefault().notInItem}
+                svs.getNormalList(url, 'POST', params);
             });
 
         })

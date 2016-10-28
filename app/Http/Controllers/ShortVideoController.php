@@ -21,4 +21,10 @@ class ShortVideoController extends Controller
 
         return view('short-video.detail', compact('item'));
     }
+
+    public function postClickCount(Request $request,$id){
+
+        ShortVideoModule::incrementClickCount($id);
+
+    }
 }

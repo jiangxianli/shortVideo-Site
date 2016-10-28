@@ -10,7 +10,7 @@
         <div class="page page-current">
             <!-- 标题栏 -->
             <header class="bar bar-nav page-title">
-                <a class="icon icon-me pull-left open-panel"></a>
+                <a class="icon icon-left pull-left back"></a>
                 <h1 class="title">详情</h1>
             </header>
 

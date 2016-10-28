@@ -5,10 +5,15 @@
   .page-title .title {
     color: #FFFFFF;
     font-size: 1.2rem; }
-  .page-title .icon-me {
+  .page-title .icon-me, .page-title .icon-app {
     color: #ffffff;
     font-size: 1.7rem;
     text-decoration: none; }
+  .page-title .icon-left {
+    color: #ffffff;
+    font-size: 1.5rem;
+    text-decoration: none;
+    margin-left: -0.3rem; }
 
 .video-card {
   background: #000000;
@@ -30,16 +35,28 @@
   line-height: 1.2rem;
   padding: 0.2rem;
   margin-right: 0.5rem;
-  cursor: pointer; }
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 0.4rem; }
 
 .card-bottom {
   width: 100%;
   display: inline-block; }
+  .card-bottom .tags {
+    width: 70%;
+    height: 1.6rem;
+    display: inline-block;
+    overflow: hidden; }
   .card-bottom a.link {
     display: inline-block;
     float: right; }
     .card-bottom a.link span.icon {
       font-size: 1.2rem;
+      margin-left: 0.5rem; }
+    .card-bottom a.link span.fa {
+      font-size: 1.2rem;
+      height: 2.2rem;
+      line-height: 2.2rem;
       margin-left: 0.5rem; }
 
 .card-items-block {
@@ -94,6 +111,15 @@
     display: block; }
   .oauth2-login .ds-login {
     margin: 0 auto; }
+
+.tag-items {
+  width: 94%;
+  margin: 0rem auto;
+  height: auto;
+  background: #ffffff; }
+  .tag-items li {
+    display: inline-block;
+    margin-top: 0.4rem; }
 
 /*# sourceMappingURL=app.css.map */
 

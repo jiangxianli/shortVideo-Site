@@ -1,7 +1,7 @@
 @extends('layout.html')
 
 @section('title')
-    小视频
+    观看历史
 @stop
 @section('body')
     <!-- page集合的容器，里面放多个平行的.page，其他.page作为内联页面由路由控制展示 -->
@@ -10,8 +10,8 @@
         <div class="page page-current">
             <!-- 标题栏 -->
             <header class="bar bar-nav page-title">
-                <a class="icon icon-me pull-left open-panel"></a>
-                <h1 class="title">小视频</h1>
+                <a class="icon icon-left pull-left back"></a>
+                <h1 class="title">观看历史</h1>
             </header>
 
             <!-- 这里是页面内容区 -->
@@ -61,10 +61,10 @@
         $(function(){
             var url = '/watch-list';
             var svs = $$.svs();
-            var params = {page: svs.getDefault().page, not_in_item: svs.getDefault.notItem,in_items:svs.getWatchCache()}
+            var params = {_token:"{{ csrf_token() }}",page: svs.getDefault().curPage, not_in_item: svs.getDefault.notInItem,in_items:svs.getWatchCache()}
             svs.getNormalList(url,'POST',params );
             svs.initScroll(function () {
-                params = {page: svs.getDefault().page, not_in_item: svs.getDefault.notItem,in_items:svs.getWatchCache()}
+                params = {_token:"{{ csrf_token() }}",page: svs.getDefault().curpage, not_in_item: svs.getDefault.notInItem,in_items:svs.getWatchCache()}
                 svs.getNormalList(url,'POST',params );
             });
 
