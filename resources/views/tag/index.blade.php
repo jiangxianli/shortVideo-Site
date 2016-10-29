@@ -17,7 +17,15 @@
 
 
             <!-- 这里是页面内容区 -->
-            <div class="content infinite-scroll infinite-scroll-bottom" data-distance="100">
+            <div class="content infinite-scroll infinite-scroll-bottom  pull-to-refresh-content" data-distance="100"  data-ptr-distance="55">
+
+
+                <!-- 默认的下拉刷新层 -->
+                <div class="pull-to-refresh-layer">
+                    <div class="preloader"></div>
+                    <div class="pull-to-refresh-arrow"></div>
+                </div>
+
                 <div class="content-block card-items-block">
                     <div class="card-items">
 
@@ -51,6 +59,10 @@
                 params = {_token:"{{ csrf_token() }}",tag_id: "{{ $tag->id }}",page: svs.getDefault().curPage, not_in_item: svs.getDefault().notInItem}
                 svs.getNormalList(url, 'POST', params);
             });
+            svs.pullToRefresh(function(){
+                params = {_token:"{{ csrf_token() }}",tag_id: "{{ $tag->id }}",page: svs.getDefault().curPage, not_in_item: svs.getDefault().notInItem}
+                svs.getNormalList(url, 'POST', params,'before');
+            })
 
         })
     </script>

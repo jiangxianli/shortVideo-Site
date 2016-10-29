@@ -39,10 +39,10 @@ class SpiderYidian extends Command
     public function handle()
     {
         $docid = $this->option('docid');
-        if($docid){
+        if ($docid) {
             //V_00TU5W5p
             SpiderModule::spiderYidianItem($docid);
-        }else{
+        } else {
             SpiderModule::spiderLastestYidian();
         }
     }

@@ -46,7 +46,8 @@
     width: 70%;
     height: 1.6rem;
     display: inline-block;
-    overflow: hidden; }
+    overflow: hidden;
+    float: left; }
   .card-bottom a.link {
     display: inline-block;
     float: right; }
@@ -58,13 +59,19 @@
       height: 2.2rem;
       line-height: 2.2rem;
       margin-left: 0.5rem; }
+  .card-bottom .link-item {
+    width: 6rem;
+    display: inline-block;
+    float: right;
+    height: auto;
+    overflow: hidden; }
 
 .card-items-block {
   padding-left: 0;
   padding-right: 0; }
   .card-items-block .card-items .card-detail {
     color: #666;
-    font-size: 1rem; }
+    font-size: 0.8rem; }
 
 .login-user {
   width: 80%;
@@ -114,16 +121,17 @@
 
 .tag-items {
   width: 100%;
-  margin: 0rem auto;
+  margin: 0.5rem auto;
   padding-left: 15px;
   height: auto;
   background: #ffffff; }
   .tag-items li {
     display: inline-block;
-    margin-top: 0.4rem; }
+    margin-top: 0.2rem; }
     .tag-items li .tag-item {
-      height: 1.6rem;
-      line-height: 1.6rem;
-      padding: 0 0.4rem; }
+      height: 1.4rem;
+      line-height: 1.4rem;
+      padding: 0 0.4rem;
+      margin-bottom: 0.15rem; }
 
 /*# sourceMappingURL=app.css.map */

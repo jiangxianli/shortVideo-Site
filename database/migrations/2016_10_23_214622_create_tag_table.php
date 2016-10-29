@@ -23,8 +23,8 @@ class CreateTagTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index('name','name');
-            $table->index('sort','sort');
+            $table->index('name', 'name');
+            $table->index('sort', 'sort');
         });
     }
 

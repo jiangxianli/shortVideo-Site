@@ -22,8 +22,8 @@ class CreateShortVideoTagTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index('tag_id','tag_id');
-            $table->index('short_video_id','short_video_id');
+            $table->index('tag_id', 'tag_id');
+            $table->index('short_video_id', 'short_video_id');
 
         });
     }

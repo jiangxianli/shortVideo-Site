@@ -18,15 +18,17 @@ class TagModule
     public static function getTagList($not_in_items = [])
     {
         $tags = TagFactory::tagSearch([
-            'default_select' => [
+            'default_select'   => [
                 'id', 'name'
             ],
-            'not_in_items'   => [
+            'not_in_items'     => [
                 'id' => $not_in_items
             ],
-            'default_with'   => function ($query) {
-                $query->select(['id']);
-            }
+            'default_relation' => [
+                'shortVideoTag' => function ($query) {
+//                    $query->select('id');
+                }
+            ]
         ]);
 
         return $tags->paginate(100);

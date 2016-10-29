@@ -139,6 +139,13 @@ $(function () {
                                 _this.watchRecord(card.attr('id'))
                             }
                         });
+
+                        //
+                        var cardBottom = _item.find('.card-bottom');
+                        var linkWidth = cardBottom.find('.link-item');
+                        console.info( linkWidth.width(),cardBottom.width())
+                        cardBottom.find('.tags').css({ 'width' : ( cardBottom.width() - linkWidth.width() - 30 )})
+
                     }
 
                 });

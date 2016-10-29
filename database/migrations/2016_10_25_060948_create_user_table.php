@@ -25,8 +25,8 @@ class CreateUserTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index('nick_name','nick_name');
-            $table->index('duo_shuo_id','duo_shuo_id');
+            $table->index('nick_name', 'nick_name');
+            $table->index('duo_shuo_id', 'duo_shuo_id');
         });
     }
 

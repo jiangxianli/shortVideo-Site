@@ -24,14 +24,14 @@ class CreateShortVideoTable extends Migration
             $table->string('platform_type')->default('')->comemnt('平台来源');
             $table->integer('click_count')->default(0)->comment('点击量');
             $table->tinyInteger('status')->default(1)->comment('审核状态');
-            $table->string('random',32)->default('')->comment('随机串');
+            $table->string('random', 32)->default('')->comment('随机串');
 
             $table->timestamps();
             $table->softDeletes();
 
             $table->index('click_count');
-            $table->index('platform_id','platform_id');
-            $table->index('random','random');
+            $table->index('platform_id', 'platform_id');
+            $table->index('random', 'random');
         });
     }
 

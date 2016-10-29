@@ -65,6 +65,7 @@
     height: 1.6rem;
     display: inline-block;
     overflow: hidden;
+    float: left;
   }
   a.link {
     display: inline-block;
@@ -80,6 +81,13 @@
       margin-left: 0.5rem;
     }
   }
+  .link-item {
+    width: 6rem;
+    display: inline-block;
+    float: right;
+    height: auto;
+    overflow: hidden;
+  }
 }
 
 .card-items-block {
@@ -88,7 +96,7 @@
   .card-items {
     .card-detail {
       color: #666;
-      font-size: 1rem;
+      font-size: 0.8rem;
     }
   }
 }
@@ -150,17 +158,18 @@
 
 .tag-items {
   width: 100%;
-  margin: 0rem auto;
+  margin: 0.5rem auto;
   padding-left: 15px;
   height: auto;
   background: #ffffff;
   li {
     display: inline-block;
-    margin-top: 0.4rem;
+    margin-top: 0.2rem;
     .tag-item {
-        height:1.6rem;
-      line-height:1.6rem;
-      padding:0 0.4rem;
+      height: 1.4rem;
+      line-height: 1.4rem;
+      padding: 0 0.4rem;
+      margin-bottom: 0.15rem;
     }
   }
 }

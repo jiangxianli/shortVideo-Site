@@ -32,6 +32,38 @@ class Tag extends BaseModel
      */
     public function shortVideo()
     {
-        return $this->belongsTo(__NAMESPACE__, '\ShortVideo', 'short_video_tag', 'tag_id', 'short_video_id');
+        return $this->belongsToMany(__NAMESPACE__. '\ShortVideo', 'short_video_tag', 'short_video_id', 'tag_id');
     }
+
+    /**
+     * HasMany ShortVideoTag
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @author  jiangxianli
+     * @created_at 2016-10-29 15:17:08
+     */
+    public function shortVideoTag()
+    {
+        return $this->hasMany(__NAMESPACE__.'\ShortVideoTag', 'tag_id', 'id');
+    }
+
+    /**
+     * 标签相关视频个数统计
+     *
+     * @return int
+     * @author  jiangxianli
+     * @created_at 2016-10-29 15:21:30
+     */
+    public function shortVideoCount()
+    {
+        $short_video_tags = $this->shortVideoTag;
+        $short_video_arr  = [];
+        foreach ($short_video_tags as $short_video_tag) {
+            if (!in_array($short_video_tag->short_video_id, $short_video_arr)) {
+                $short_video_arr[] = $short_video_tag->short_video_id;
+            }
+        }
+        return count($short_video_arr);
+    }
+
 }
