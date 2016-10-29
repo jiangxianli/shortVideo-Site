@@ -31,7 +31,7 @@ class TagModule
             ]
         ]);
 
-        return $tags->paginate(20);
+        return $tags->paginate(50);
     }
 
     /**
