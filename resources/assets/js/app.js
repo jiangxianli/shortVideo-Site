@@ -30,6 +30,7 @@ $(function () {
                 curPage: 1, //当前页码
                 notInItem: Array(), //排除项ID
                 cardItemsWrapper: '.card-items', //视频项外层DIV
+                loading:false, //是否加载中
                 hasMore: true, //是否加载完
                 curPlayVideo: null, //当前播放视频
                 cardItem: '.card-new', //新增视频项
@@ -76,6 +77,7 @@ $(function () {
             };
             //获取视频列表
             _this.getNormalList = function getNormalList(url, method, prams, appendPosition) {
+                _default.loading = true;
                 $.ajax({
                     url: url,
                     type: method,
@@ -86,13 +88,16 @@ $(function () {
                         } else {
                             $(_default.cardItemsWrapper).append(response.view)
                         }
-
                         _this.renderHtml();
                         _default.curPage++;
                         if (response.current_page >= response.last_page) {
                             _default.hasMore = false;
                             $(_default.infiniteScroll).trigger('infinite')
                         }
+                        _default.loading = false;
+                    },
+                    error:function(){
+                        _default.loading = false;
                     }
                 })
             };
@@ -183,7 +188,7 @@ $(function () {
                         //lastIndex = $('.list-container li').length;
                         //容器发生改变,如果是js滚动，需要刷新滚动
                         $.refreshScroller();
-                    }, 1000);
+                    }, 500);
 
                 });
             };
@@ -191,12 +196,15 @@ $(function () {
             _this.pullToRefresh = function (callback) {
                 // 添加'refresh'监听器
                 $(document).on('refresh', _default.pullToRefresh, function (e) {
+                    // 如果正在加载，则退出
+                    if (_default.loading) return;
+
                     // 模拟2s的加载过程
                     setTimeout(function () {
                         callback();
                         // 加载完毕需要重置
                         $.pullToRefreshDone(_default.pullToRefresh);
-                    }, 2000);
+                    }, 500);
                 });
             }
 

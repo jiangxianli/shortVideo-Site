@@ -41,7 +41,8 @@
 
 .card-bottom {
   width: 100%;
-  display: inline-block; }
+  display: inline-block;
+  border-top: 1px solid #e1e1e1; }
   .card-bottom .tags {
     width: 70%;
     height: 1.6rem;
@@ -133,5 +134,8 @@
       line-height: 1.4rem;
       padding: 0 0.4rem;
       margin-bottom: 0.15rem; }
+
+.card-footer:before {
+  height: 0; }
 
 /*# sourceMappingURL=app.css.map */

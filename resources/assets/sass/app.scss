@@ -60,6 +60,7 @@
 .card-bottom {
   width: 100%;
   display: inline-block;
+  border-top:1px solid #e1e1e1;
   .tags {
     width: 70%;
     height: 1.6rem;
@@ -172,4 +173,8 @@
       margin-bottom: 0.15rem;
     }
   }
+}
+
+.card-footer:before{
+  height:0;
 }
