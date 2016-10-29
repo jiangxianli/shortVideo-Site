@@ -39,7 +39,7 @@
 @section('bottom-scripts')
     <script>
         $(function(){
-            var url = '/tag-list';
+            var url = "{{ action('TagController@postTagList') }}";
             var svs = $$.svs({
                 cardItemsWrapper: '.tag-items'
             });

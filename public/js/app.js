@@ -282,61 +282,68 @@ $(function () {
     $$.extend({
 
         svs: function (_opt) {
-
             var _this = this;
             var _default = {
-                curPage: 1,
-                notInItem: Array(),
-                cardItemsWrapper: '.card-items',
-                hasMore: true,
-                curPlayVideo: null,
-                cardItem: '.card-new',
-                infiniteScroll: '.infinite-scroll-bottom',
-                watchItems : Array()
+                curPage: 1, //当前页码
+                notInItem: Array(), //排除项ID
+                cardItemsWrapper: '.card-items', //视频项外层DIV
+                hasMore: true, //是否加载完
+                curPlayVideo: null, //当前播放视频
+                cardItem: '.card-new', //新增视频项
+                infiniteScroll: '.infinite-scroll-bottom', //无限滚动
+                watchItems: Array(), //观看历史项
+                pullToRefresh: '.pull-to-refresh-content', //下拉刷新
 
             };
             _default = $$.extend(_default, _opt);
-            console.info(_default)
+
+            //设置默认参数
             _this.setDefault = function (_opt) {
                 _default = $$.extend(_default, _opt);
             };
-            _this.getDefault = function(){
+            //获取默认参数
+            _this.getDefault = function () {
                 return _default;
             };
-
-            _this.getWatchCache = function(){
-                if(window.localStorage){
+            //观看历史
+            _this.getWatchCache = function () {
+                if (window.localStorage) {
                     var items = localStorage.getItem('watch-record')
-                    if(items){
+                    if (items) {
                         items = JSON.parse(items);
-                    }else{
+                    } else {
                         items = [];
-                        //_default.watchItems = JSON.stringify(_default.watchItems)
                     }
                     return items;
                 }
-            }
-            _this.watchRecord = function(id){
-                if(window.localStorage){
+            };
+            //加入观看历史列表
+            _this.watchRecord = function (id) {
+                if (window.localStorage) {
                     _default.watchItems = localStorage.getItem('watch-record')
-                    if(_default.watchItems){
+                    if (_default.watchItems) {
                         _default.watchItems = JSON.parse(_default.watchItems);
-                    }else{
+                    } else {
                         _default.watchItems = [];
-                        //_default.watchItems = JSON.stringify(_default.watchItems)
                     }
 
                     _default.watchItems.push(id)
-                    localStorage.setItem('watch-record',JSON.stringify(_default.watchItems))
+                    localStorage.setItem('watch-record', JSON.stringify(_default.watchItems))
                 }
-            }
-            _this.getNormalList = function getNormalList(url, method, prams) {
+            };
+            //获取视频列表
+            _this.getNormalList = function getNormalList(url, method, prams, appendPosition) {
                 $.ajax({
                     url: url,
                     type: method,
                     data: prams,
                     success: function (response) {
-                        $(_default.cardItemsWrapper).append(response.view)
+                        if (appendPosition == 'before') {
+                            $(_default.cardItemsWrapper).prepend(response.view)
+                        } else {
+                            $(_default.cardItemsWrapper).append(response.view)
+                        }
+
                         _this.renderHtml();
                         _default.curPage++;
                         if (response.current_page >= response.last_page) {
@@ -345,9 +352,9 @@ $(function () {
                         }
                     }
                 })
-            }
-
-            _this.incrementClickCount = function(url){
+            };
+            //增加视频播放次数
+            _this.incrementClickCount = function (url) {
                 $.ajax({
                     url: url,
                     type: 'GET',
@@ -356,8 +363,8 @@ $(function () {
 
                     }
                 })
-            }
-
+            };
+            //渲染视频列表HTML
             _this.renderHtml = function () {
                 $(_default.cardItem).each(function (i, item) {
                     var _item = $(item);
@@ -393,8 +400,8 @@ $(function () {
 
                 });
 
-            }
-
+            };
+            //无限滚动
             _this.initScroll = function (callback) {
 
                 // 注册'infinite'事件处理函数
@@ -429,24 +436,30 @@ $(function () {
                     }, 1000);
 
                 });
+            };
+            //下拉刷新
+            _this.pullToRefresh = function (callback) {
+                // 添加'refresh'监听器
+                $(document).on('refresh', _default.pullToRefresh, function (e) {
+                    // 模拟2s的加载过程
+                    setTimeout(function () {
+                        callback();
+                        // 加载完毕需要重置
+                        $.pullToRefreshDone(_default.pullToRefresh);
+                    }, 2000);
+                });
             }
 
             return _this;
-
-
         }
+
     });
 
+    $.init();
     //$(document).on('click', 'a.card-detail', function () {
     //    $.router.load($(this).attr('data-href'),true);
     //})
 
-
-    $.init();
-
-
 });
-
-//# sourceMappingURL=app.js.map
 
 //# sourceMappingURL=app.js.map

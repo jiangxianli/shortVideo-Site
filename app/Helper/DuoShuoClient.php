@@ -40,7 +40,7 @@ class DuoShuoClient
             'code'      => $code,
             'client_id' => 'jiangxianli'
         ]);
-        $response =  json_decode($response, true);
+        $response = json_decode($response, true);
 
         return $response;
 
@@ -52,7 +52,7 @@ class DuoShuoClient
         $url      = 'http://api.duoshuo.com/users/profile.json?user_id=' . $user_id;
         $response = CURL::get($url);
         $response = (array)json_decode($response, true);
-        if($response && $response['code'] == 0){
+        if ($response && $response['code'] == 0) {
 
             return $response['response'];
         }

@@ -1,11 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Factory\UserFactory;
-use App\Helper\DuoShuoClient;
 use App\Module\ShortVideoModule;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 
 class UserController extends Controller
 {
@@ -22,54 +19,6 @@ class UserController extends Controller
     }
 
     /**
-     * 用户登录
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     * @author  jiangxianli
-     * @created_at 2016-10-27 18:36:28
-     */
-    public function getLogin(Request $request)
-    {
-        //多说用户登录
-        $response = DuoShuoClient::getAccessToken($request->get('code'));
-        //查询用户信息
-        $user = UserFactory::userModel()->where(['duo_shuo_id' => $response['user_id']])->first();
-        if (!$user) {
-            //获取多说用户信息
-            $user_info = DuoShuoClient::getUserInfo($response['user_id']);
-            $arr       = [
-                'nick_name'     => $user_info['name'],
-                'image_url'     => $user_info['avatar_url'],
-                'duo_shuo_id'   => $user_info['user_id'],
-                'duo_shuo_info' => json_encode($user_info),
-            ];
-            //创建新用户
-            $user = UserFactory::createUser($arr);
-        }
-        //用户登录
-        \Auth::login($user);
-
-        return redirect('/');
-    }
-
-    /**
-     * 退出登录
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     * @author  jiangxianli
-     * @created_at 2016-10-27 18:38:50
-     */
-    public function getLogout(Request $request)
-    {
-        if (\Auth::check()) {
-            \Auth::logout();
-        }
-
-        return redirect('/');
-    }
-
-    /**
      * 观看列表
      *
      * @param Request $request
@@ -77,12 +26,12 @@ class UserController extends Controller
      * @author  jiangxianli
      * @created_at 2016-10-27 18:57:29
      */
-    public function getWatchList(Request $request)
+    public function postWatchList(Request $request)
     {
-        $in_items = $request->get('in_items', []);
+        $in_items     = $request->get('in_items', []);
         $not_in_items = $request->get('not_in_items', []);
 
-        $items = ShortVideoModule::getWatchList($not_in_items,$in_items, 5);
+        $items = ShortVideoModule::getWatchList($not_in_items, $in_items, 5);
 
         //视频列表渲染
         $view = view('short-video._items', compact('items'))->render();
@@ -92,6 +41,13 @@ class UserController extends Controller
         return $items;
     }
 
+    /**
+     * 观看历史页面
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author  jiangxianli
+     * @created_at 2016-10-29 13:46:30
+     */
     public function getWatchHistoryPage()
     {
         return view('user.watch-history');

@@ -30,17 +30,19 @@
             @endforeach
         </div>
 
-        <a  class="link "
-            data-no-cache="true"
-            external
-            href="{{ action('ShortVideoController@getDetail',['id' => $item->id ]) }}">
-            <span class="fa fa-comment-o"></span>
-            12
-        </a>
-        <a href="#" class="link">
-            <span class=" fa fa-eye"></span>
-            {{ $item->click_count }}
-        </a>
+        <div class="link-item">
+            <a  class="link "
+                data-no-cache="true"
+                external
+                href="{{ action('ShortVideoController@getDetail',['id' => $item->id ]) }}">
+                <span class="fa fa-comment-o"></span>
+                12
+            </a>
+            <a href="#" class="link">
+                <span class=" fa fa-eye"></span>
+                {{ $item->click_count }}
+            </a>
+        </div>
     </div>
 </div>
 @endforeach

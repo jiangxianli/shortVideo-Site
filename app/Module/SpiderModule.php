@@ -33,16 +33,16 @@ class SpiderModule
             }
 
             $short_video = ShortVideoFactory::shortVideoModel();
-            $arr = [
-                'url' => $documents['video_url'],
-                'poster' => $documents['image'],
-                'platform_id' => $documents['docid'],
+            $arr         = [
+                'url'           => $documents['video_url'],
+                'poster'        => $documents['image'],
+                'platform_id'   => $documents['docid'],
                 'platform_type' => 1,
-                'title' => $documents['title'],
-                'random' => str_random(rand(16, 32))
+                'title'         => $documents['title'],
+                'random'        => str_random(rand(16, 32))
             ];
             $short_video = $short_video->where([
-                'platform_id' => $arr['platform_id'],
+                'platform_id'   => $arr['platform_id'],
                 'platform_type' => $arr['platform_id']
             ])->first();
             if (!$short_video) {
@@ -54,7 +54,7 @@ class SpiderModule
                 $tag_id_arr = [];
                 if (isset($documents['keywords'])) {
                     foreach ($documents['keywords'] as $value) {
-                        $tag = ShortVideoFactory::tagModel()->firstOrCreate(['name' => $value]);
+                        $tag          = ShortVideoFactory::tagModel()->firstOrCreate(['name' => $value]);
                         $tag_id_arr[] = $tag->id;
                     }
 
@@ -62,7 +62,7 @@ class SpiderModule
 
                 if (isset($documents['vsct_show'])) {
                     foreach ($documents['vsct_show'] as $value) {
-                        $tag = ShortVideoFactory::tagModel()->firstOrCreate(['name' => $value]);
+                        $tag          = ShortVideoFactory::tagModel()->firstOrCreate(['name' => $value]);
                         $tag_id_arr[] = $tag->id;
                     }
                 }
@@ -70,16 +70,16 @@ class SpiderModule
                 $short_video->tags()->sync($tag_id_arr);
                 \Log::info($url);
 
-                if($count >= 1000){
-                    return ;
+                if ($count >= 1000) {
+                    return;
                 }
-                $count ++;
+                $count++;
                 \Log::info($count);
 
                 if (isset($documents['recommend_video'])) {
                     foreach ($documents['recommend_video'] as $recommend_video) {
                         $short_video = ShortVideoFactory::shortVideoModel()->where([
-                            'platform_id' => $recommend_video['docid'],
+                            'platform_id'   => $recommend_video['docid'],
                             'platform_type' => 1
                         ])->first();
                         if (!$short_video) {
@@ -92,8 +92,6 @@ class SpiderModule
 
             }
         }
-
-
     }
 
     public static function spiderLastestYidian()

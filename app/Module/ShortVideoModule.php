@@ -22,7 +22,7 @@ class ShortVideoModule
 
                 }
             ],
-            'not_in_items' => [
+            'not_in_items'     => [
                 'id' => $not_in_items
             ]
         ]);
@@ -46,7 +46,7 @@ class ShortVideoModule
 
                 }
             ],
-            'id' => $id
+            'id'               => $id
         ]);
 
         return $short_video->first();
@@ -70,10 +70,10 @@ class ShortVideoModule
 
                 }
             ],
-            'not_in_items' => [
+            'not_in_items'     => [
                 'id' => $not_in_items
             ],
-            'in_items' => [
+            'in_items'         => [
                 'id' => $in_items
             ]
         ]);
@@ -81,6 +81,13 @@ class ShortVideoModule
         return $short_video->paginate($per_page);
     }
 
+    /**
+     * 更新视频播放次数
+     *
+     * @param $id
+     * @author  jiangxianli
+     * @created_at 2016-10-29 13:46:51
+     */
     public static function incrementClickCount($id)
     {
         $item = ShortVideoFactory::shortVideoSearch([

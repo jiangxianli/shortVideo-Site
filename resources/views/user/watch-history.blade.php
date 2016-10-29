@@ -28,27 +28,7 @@
                     <div class="preloader"></div>
                 </div>
             </div>
-
-
-            <!-- 工具栏 -->
-            {{--<nav class="bar bar-tab">--}}
-                {{--<a class="tab-item external active" href="#">--}}
-                    {{--<span class="icon icon-home"></span>--}}
-                    {{--<span class="tab-label">首页</span>--}}
-                {{--</a>--}}
-                {{--<a class="tab-item external" href="#">--}}
-                    {{--<span class="icon icon-star"></span>--}}
-                    {{--<span class="tab-label">收藏</span>--}}
-                {{--</a>--}}
-                {{--<a class="tab-item external" href="#">--}}
-                    {{--<span class="icon icon-settings"></span>--}}
-                    {{--<span class="tab-label">设置</span>--}}
-                {{--</a>--}}
-            {{--</nav>--}}
         </div>
-
-        <!-- 其他的单个page内联页（如果有） -->
-        <div class="page">...</div>
     </div>
 
     <!-- popup, panel 等放在这里 -->
@@ -59,7 +39,7 @@
 @section('bottom-scripts')
     <script>
         $(function(){
-            var url = '/watch-list';
+            var url = "{{ action('UserController@postWatchList') }}";
             var svs = $$.svs();
             var params = {_token:"{{ csrf_token() }}",page: svs.getDefault().curPage, not_in_item: svs.getDefault.notInItem,in_items:svs.getWatchCache()}
             svs.getNormalList(url,'POST',params );

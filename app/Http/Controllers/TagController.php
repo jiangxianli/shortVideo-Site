@@ -1,12 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Factory\UserFactory;
-use App\Helper\DuoShuoClient;
-use App\Module\ShortVideoModule;
 use App\Module\TagModule;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 
 class TagController extends Controller
 {
@@ -22,7 +18,17 @@ class TagController extends Controller
         return view('tag.list');
     }
 
-    public function getTagList(Request $request)
+    /**
+     * 标签列表
+     *
+     * @param Request $request
+     * @return mixed
+     * @throws \Exception
+     * @throws \Throwable
+     * @author  jiangxianli
+     * @created_at 2016-10-29 13:30:07
+     */
+    public function postTagList(Request $request)
     {
 
         $not_in_items = $request->get('not_in_items', []);
@@ -37,16 +43,36 @@ class TagController extends Controller
         return $tags;
     }
 
-    public function getTagDetail(Request $request, $id ){
+    /**
+     * 标签详情
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author  jiangxianli
+     * @created_at 2016-10-29 13:31:02
+     */
+    public function getTagDetail(Request $request, $id)
+    {
 
         $tag = TagModule::getTagDetail($id);
 
-        return view('tag.index',compact('tag'));
+        return view('tag.index', compact('tag'));
 
     }
 
-
-    public function getTagVideoList(Request $request, $id)
+    /**
+     * 标签视频列表
+     *
+     * @param Request $request
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     * @throws \Throwable
+     * @author  jiangxianli
+     * @created_at 2016-10-29 13:28:31
+     */
+    public function postTagVideoList(Request $request, $id)
     {
         $not_in_items = $request->get('not_in_items', []);
 
@@ -58,7 +84,5 @@ class TagController extends Controller
         $items         = $items->toArray();
         $items['view'] = $view;
         return $items;
-
-        return $tags;
     }
 }

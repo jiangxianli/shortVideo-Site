@@ -25,12 +25,12 @@
             <li>
                 <a data-no-cache="true"
                    class="close-panel"
-                   href="/tags">标签库</a>
+                   href="{{ action('TagController@getTagPage') }}">标签库</a>
             </li>
             <li>
                 <a data-no-cache="true"
                    class="close-panel"
-                   href="/watch-history">历史观看</a>
+                   href="{{ action('UserController@getWatchHistoryPage') }}">历史观看</a>
             </li>
             <li>
                 <a data-no-cache="true"
@@ -40,7 +40,6 @@
                 </a>
             </li>
         </ul>
-
 
         <!-- Click on link with "close-panel" class will close panel -->
         {{--<p><a href="#" class="close-panel">关闭</a></p>--}}
