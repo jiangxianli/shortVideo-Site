@@ -31,7 +31,7 @@ class TagModule
             ]
         ]);
 
-        return $tags->paginate(100);
+        return $tags->paginate(20);
     }
 
     /**
@@ -73,6 +73,6 @@ class TagModule
             $query->where('tag.id', $tag_id);
         })->orderBy('random','desc');
 
-        return $items->paginate(20);
+        return $items->paginate(5);
     }
 }
