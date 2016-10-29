@@ -110,7 +110,7 @@ class ShortVideoModule
         $per_page          = 1000;
         $last_page         = ceil($short_video_count / $per_page);
         for ($i = 1; $i <= $last_page; $i++) {
-            $short_videos = ShortVideoFactory::shortVideoSearch()->skip(($i - 1) * $per_page)->take($per_page)->get();
+            $short_videos = ShortVideoFactory::shortVideoSearch([])->skip(($i - 1) * $per_page)->take($per_page)->get();
             foreach ($short_videos as $short_video) {
                 $short_video->random = str_random(rand(16, 32));
                 $short_video->save();
