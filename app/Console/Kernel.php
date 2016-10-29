@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\SpiderYidian::class
+        Commands\SpiderYidian::class,
+        Commands\ShortVideoRandom::class
     ];
 
     /**
@@ -25,6 +26,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('command:spider-yi-dian')
+            ->hourly();
+        $schedule->command('command:short-video-random')
             ->hourly();
     }
 

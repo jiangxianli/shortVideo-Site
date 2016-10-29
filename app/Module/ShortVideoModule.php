@@ -98,4 +98,24 @@ class ShortVideoModule
         }
     }
 
+    /**
+     * 更新视频随机数
+     *
+     * @author  jiangxianli
+     * @created_at 2016-10-29 16:17:46
+     */
+    public static function updateRandom()
+    {
+        $short_video_count = ShortVideoFactory::shortVideoSearch([])->count();
+        $per_page          = 1000;
+        $last_page         = ceil($short_video_count / $per_page);
+        for ($i = 1; $i <= $last_page; $i++) {
+            $short_videos = ShortVideoFactory::shortVideoSearch()->skip(($i - 1) * $per_page)->take($per_page)->get();
+            foreach ($short_videos as $short_video) {
+                $short_video->random = str_random(rand(16, 32));
+                $short_video->save();
+            }
+        }
+    }
+
 }

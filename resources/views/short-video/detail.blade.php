@@ -12,6 +12,7 @@
             <header class="bar bar-nav page-title">
                 <a class="icon icon-left pull-left back"></a>
                 <h1 class="title">详情</h1>
+                <a class="icon icon-app pull-right" href="{{ action('TagController@getTagPage') }}" external></a>
             </header>
 
             <!-- 这里是页面内容区 -->
@@ -36,15 +37,6 @@
                         @foreach($item->tags as $tag)
                             <a class="tag-item">{{ $tag->name }}</a>
                         @endforeach
-
-                        {{--<a href="#" class="link">--}}
-                            {{--<span class="icon icon-message"></span>--}}
-                            {{--12--}}
-                        {{--</a>--}}
-                        {{--<a href="#" class="link">--}}
-                            {{--<span class="icon icon-star"></span>--}}
-                            {{--12--}}
-                        </a>
                     </div>
                 </div>
 

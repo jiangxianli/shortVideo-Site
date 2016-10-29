@@ -2,25 +2,24 @@
 
 namespace App\Console\Commands;
 
-use App\Module\ShortVideoModule;
 use App\Module\SpiderModule;
 use Illuminate\Console\Command;
 
-class SpiderYidian extends Command
+class ShortVideoRandom extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'command:spider-yi-dian {--docid=}';
+    protected $signature = 'command:short-video-random';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = '抓取一点资讯视频 docid:视频ID';
+    protected $description = '给每个视频生产随机数';
 
     /**
      * Create a new command instance.
@@ -39,6 +38,12 @@ class SpiderYidian extends Command
      */
     public function handle()
     {
-        ShortVideoModule::updateRandom();
+        $docid = $this->option('docid');
+        if ($docid) {
+            //V_00TU5W5p
+            SpiderModule::spiderYidianItem($docid);
+        } else {
+            SpiderModule::spiderLastestYidian();
+        }
     }
 }

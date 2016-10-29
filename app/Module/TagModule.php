@@ -71,7 +71,7 @@ class TagModule
             ]
         ])->whereHas('tags', function ($query) use ($tag_id) {
             $query->where('tag.id', $tag_id);
-        })->orderBy(\DB::raw('rand()'));
+        })->orderBy('random','desc');
 
         return $items->paginate(100);
     }
