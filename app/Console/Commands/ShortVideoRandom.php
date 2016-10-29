@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Module\ShortVideoModule;
 use App\Module\SpiderModule;
 use Illuminate\Console\Command;
 
@@ -38,12 +39,7 @@ class ShortVideoRandom extends Command
      */
     public function handle()
     {
-        $docid = $this->option('docid');
-        if ($docid) {
-            //V_00TU5W5p
-            SpiderModule::spiderYidianItem($docid);
-        } else {
-            SpiderModule::spiderLastestYidian();
-        }
+
+        ShortVideoModule::updateRandom();
     }
 }

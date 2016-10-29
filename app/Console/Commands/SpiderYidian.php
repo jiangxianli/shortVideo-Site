@@ -39,6 +39,12 @@ class SpiderYidian extends Command
      */
     public function handle()
     {
-        ShortVideoModule::updateRandom();
+        $docid = $this->option('docid');
+        if ($docid) {
+            //V_00TU5W5p
+            SpiderModule::spiderYidianItem($docid);
+        } else {
+            SpiderModule::spiderLastestYidian();
+        }
     }
 }
