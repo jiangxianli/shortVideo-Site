@@ -113,4 +113,36 @@ class SpiderModule
         }
     }
 
+
+    public static function updateUpOrDown($command)
+    {
+        $per_page  = 10;
+        $count     = ShortVideoFactory::shortVideoModel()->where('up', 0)->count();
+        $command->out->progressStart($count);
+        $last_page = ceil($count / $per_page);
+        for ($i = 1; $i <= $last_page; $i++) {
+            $short_videos = ShortVideoFactory::shortVideoModel()->where('up', 0)->skip(($i - 1) * $per_page)->take($per_page)->get();
+            foreach ($short_videos as $short_video) {
+                $url      = 'http://124.243.203.100/Website/contents/content?docid=' . $short_video->platform_id . '&version=020109';
+                $response = CURL::get($url);
+                $response = json_decode($response, true);
+                if ($response['code'] == 0) {
+                    $documents = $response['documents'][0];
+                    if ($documents['up'] && $documents['down']) {
+
+                        $short_video->up   = $documents['up'];
+                        $short_video->down = $documents['down'];
+                        $short_video->save();
+                    }
+
+                }
+                $command->out->progressAdvance();
+                sleep(30);
+            }
+
+        }
+        $command->out->progressFinish();
+
+    }
+
 }

@@ -214,6 +214,12 @@ $(function () {
     });
 
     $.init();
+
+    $$(document).on('click','.card-new img',function(){
+        console.info('te')
+        $$(this).hide();
+        $$(this).closest('.card-new').find('video').trigger('click');
+    })
     //$(document).on('click', 'a.card-detail', function () {
     //    $.router.load($(this).attr('data-href'),true);
     //})

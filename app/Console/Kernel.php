@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\SpiderYidian::class,
-        Commands\ShortVideoRandom::class
+        Commands\ShortVideoRandom::class,
+        Commands\UpdateUpOrDown::class,
     ];
 
     /**

@@ -27,7 +27,7 @@ class ShortVideoModule
             ]
         ]);
 
-        return $short_video->orderBy('random', 'desc')->paginate($per_page);
+        return $short_video->orderBy('up', 'desc')->paginate($per_page);
     }
 
     /**
