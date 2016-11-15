@@ -117,11 +117,11 @@ class SpiderModule
     public static function updateUpOrDown($command)
     {
         $per_page = 1000;
-        $count    = ShortVideoFactory::shortVideoModel()->where('up', 0)->count();
+        $count    = ShortVideoFactory::shortVideoModel()->whereIn('up', [0, -1])->count();
         $command->out->progressStart($count);
         $last_page = ceil($count / $per_page);
         for ($i = 1; $i <= $last_page; $i++) {
-            $short_videos = ShortVideoFactory::shortVideoModel()->where('up', 0)->skip(($i - 1) * $per_page)->take($per_page)->get();
+            $short_videos = ShortVideoFactory::shortVideoModel()->whereIn('up', [0, -1])->orderBy('up', 'desc')->skip(($i - 1) * $per_page)->take($per_page)->get();
             foreach ($short_videos as $short_video) {
                 $url      = 'http://124.243.203.100/Website/contents/content?docid=' . $short_video->platform_id . '&version=020109';
                 $response = CURL::get($url);
@@ -132,6 +132,10 @@ class SpiderModule
                         \Log::info($short_video->platform_id . '--' . $documents['up'] . '---' . $documents['down']);
                         $short_video->up   = $documents['up'];
                         $short_video->down = $documents['down'];
+                        $short_video->save();
+                    } else {
+                        $short_video->up   = -1;
+                        $short_video->down = -1;
                         $short_video->save();
                     }
 
