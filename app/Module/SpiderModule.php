@@ -116,8 +116,8 @@ class SpiderModule
 
     public static function updateUpOrDown($command)
     {
-        $per_page  = 10;
-        $count     = ShortVideoFactory::shortVideoModel()->where('up', 0)->count();
+        $per_page = 1000;
+        $count    = ShortVideoFactory::shortVideoModel()->where('up', 0)->count();
         $command->out->progressStart($count);
         $last_page = ceil($count / $per_page);
         for ($i = 1; $i <= $last_page; $i++) {
@@ -128,16 +128,17 @@ class SpiderModule
                 $response = json_decode($response, true);
                 if ($response['code'] == 0) {
                     $documents = $response['documents'][0];
-                    if ($documents['up'] && $documents['down']) {
-
+                    if (isset($documents['up']) && isset($documents['down']) && $documents['up'] && $documents['down']) {
+                        \Log::info($short_video->platform_id . '--' . $documents['up'] . '---' . $documents['down']);
                         $short_video->up   = $documents['up'];
                         $short_video->down = $documents['down'];
                         $short_video->save();
                     }
 
                 }
+                \Log::info($short_video->platform_id);
                 $command->out->progressAdvance();
-                sleep(30);
+                sleep(1);
             }
 
         }
