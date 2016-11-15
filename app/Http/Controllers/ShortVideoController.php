@@ -21,7 +21,7 @@ class ShortVideoController extends Controller
         //排除页面上的ID
         $not_in_items = $request->get('not_in_items', []);
         //视频列表
-        $items = ShortVideoModule::getNormalList($not_in_items, 5);
+        $items = ShortVideoModule::getNormalList($not_in_items, 20);
         //视频列表渲染
         $view = view('short-video._items', compact('items'))->render();
 
