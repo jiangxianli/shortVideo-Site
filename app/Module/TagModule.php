@@ -18,20 +18,40 @@ class TagModule
     public static function getTagList($not_in_items = [])
     {
         $tags = TagFactory::tagSearch([
-            'default_select'   => [
+            'default_select' => [
                 'id', 'name'
             ],
-            'not_in_items'     => [
+            'not_in_items'   => [
                 'id' => $not_in_items
             ],
-            'default_relation' => [
-                'shortVideoTag' => function ($query) {
-//                    $query->select('id');
-                }
-            ]
+            //            'default_relation' => [
+            //                'shortVideoTag' => function ($query) {
+            ////                    $query->select('id');
+            //                }
+            //            ]
         ]);
 
-        return $tags->paginate(50);
+        $tags = $tags->paginate(50);
+
+        $short_video_tag  = TagFactory::shortVideoTagSearch([
+            'default_select' => [
+                'id', 'tag_id', \DB::raw("count(distinct short_video_id) as _count")
+            ],
+            'in_items'       => [
+                'tag_id' => $tags->pluck('id')
+            ],
+        ]);
+        $short_video_tags = $short_video_tag->groupBy('tag_id')->pluck('_count', 'tag_id')->all();
+        foreach ($tags as &$tag) {
+            if (isset($short_video_tags[$tag->id])) {
+                $tag->_count = $short_video_tags[$tag->id];
+            } else {
+                $tag->_count = 0;
+            }
+        }
+
+        return $tags;
+
     }
 
     /**
@@ -71,7 +91,7 @@ class TagModule
             ]
         ])->whereHas('tags', function ($query) use ($tag_id) {
             $query->where('tag.id', $tag_id);
-        })->orderBy('up','desc');
+        })->orderBy('up', 'desc');
 
         return $items->paginate(5);
     }

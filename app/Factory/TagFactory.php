@@ -21,6 +21,18 @@ class TagFactory
     }
 
     /**
+     * 视频标签
+     *
+     * @return ShortVideoTag
+     * @author jiangxianli
+     * @created_at 2016-11-16 23:26:20
+     */
+    public static function shortVideoTagModel()
+    {
+        return new ShortVideoTag();
+    }
+
+    /**
      * 标签查询
      *
      * @param $condition
@@ -31,6 +43,47 @@ class TagFactory
     public static function tagSearch($condition)
     {
         $builder = self::tagModel();
+
+        //默认查询字段
+        if ($default_select = array_get($condition, 'default_select', [])) {
+            $builder = $builder->select($default_select);
+        }
+        //默认关联加载
+        if ($default_relation = array_get($condition, 'default_relation', [])) {
+            $builder = $builder->with($default_relation);
+        }
+        //主键查询
+        if ($id = array_get($condition, 'id', [])) {
+            $builder = $builder->where('id', $id);
+        }
+        //排除项
+        if ($not_in_items = array_get($condition, 'not_in_items', [])) {
+            foreach ($not_in_items as $column => $value) {
+                $builder = $builder->whereNotIn($column, $value);
+            }
+        }
+        //包括项
+        if ($not_in_items = array_get($condition, 'in_items', [])) {
+            foreach ($not_in_items as $column => $value) {
+                $builder = $builder->whereIn($column, $value);
+            }
+        }
+
+        return $builder;
+
+    }
+
+    /**
+     * 视频标签查询
+     *
+     * @param $condition
+     * @return Tag|\Illuminate\Database\Eloquent\Builder|static
+     * @author  jiangxianli
+     * @created_at 2016-10-29 13:51:25
+     */
+    public static function shortVideoTagSearch($condition)
+    {
+        $builder = self::shortVideoTagModel();
 
         //默认查询字段
         if ($default_select = array_get($condition, 'default_select', [])) {
