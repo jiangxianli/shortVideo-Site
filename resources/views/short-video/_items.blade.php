@@ -2,7 +2,7 @@
 <div class="card demo-card-header-pic card-new" render-html="true">
     <div valign="bottom" class="card-header color-white no-border no-padding">
 
-        <img src="{{ $item->poster }}" style="position: absolute;top:0;left:0;width: 100%;height:100%;z-index: 99;" />
+{{--        <img src="{{ $item->poster }}" style="position: absolute;top:0;left:0;width: 100%;height:100%;z-index: 99;" />--}}
         <div class="video-card" style="z-index: 5"
              id="{{ $item->id }}"
              data-poster="{{  $item->poster }}"
