@@ -43,10 +43,10 @@
             var svs = $$.svs({
                 cardItemsWrapper: '.tag-items'
             });
-            var params = {_token:"{{ csrf_token() }}",page: svs.getDefault().curPage, not_in_item: svs.getDefault().notInItem}
+            var params = {_token:"{{ csrf_token() }}",page: 1, not_in_items: svs.getDefault().notInItem}
             svs.getNormalList(url, 'POST', params);
             svs.initScroll(function () {
-                params = {_token:"{{ csrf_token() }}",page: svs.getDefault().curPage, not_in_item: svs.getDefault().notInItem}
+                params = {_token:"{{ csrf_token() }}",page: 1, not_in_items: svs.getDefault().notInItem}
                 svs.getNormalList(url, 'POST', params);
             });
         })

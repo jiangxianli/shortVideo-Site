@@ -53,14 +53,14 @@
         $(function () {
             var url = "{{ action('TagController@postTagVideoList',['id'=>$tag->id]) }}";
             var svs = $$.svs();
-            var params = {_token:"{{ csrf_token() }}",tag_id: "{{ $tag->id }}" ,page: svs.getDefault().curPage, not_in_item: svs.getDefault().notInItem}
+            var params = {_token:"{{ csrf_token() }}",tag_id: "{{ $tag->id }}" ,page: 1, not_in_items: svs.getDefault().notInItem}
             svs.getNormalList(url, 'POST', params);
             svs.initScroll(function () {
-                params = {_token:"{{ csrf_token() }}",tag_id: "{{ $tag->id }}",page: svs.getDefault().curPage, not_in_item: svs.getDefault().notInItem}
+                params = {_token:"{{ csrf_token() }}",tag_id: "{{ $tag->id }}",page: 1, not_in_items: svs.getDefault().notInItem}
                 svs.getNormalList(url, 'POST', params);
             });
             svs.pullToRefresh(function(){
-                params = {_token:"{{ csrf_token() }}",tag_id: "{{ $tag->id }}",page: svs.getDefault().curPage, not_in_item: svs.getDefault().notInItem}
+                params = {_token:"{{ csrf_token() }}",tag_id: "{{ $tag->id }}",page: 1, not_in_items: svs.getDefault().notInItem}
                 svs.getNormalList(url, 'POST', params,'before');
             })
 

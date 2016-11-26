@@ -315,9 +315,15 @@ $(function () {
                     } else {
                         items = [];
                     }
+                    console.log(items)
                     return items;
                 }
+
+                return [];
             };
+
+            _default.notInItem = _this.getWatchCache();
+            
             //加入观看历史列表
             _this.watchRecord = function (id) {
                 if (window.localStorage) {
@@ -329,6 +335,8 @@ $(function () {
                     }
 
                     _default.watchItems.push(id)
+                    _default.watchItems = $$.unique(_default.watchItems);
+                    console.log(_default.watchItems)
                     localStorage.setItem('watch-record', JSON.stringify(_default.watchItems))
                 }
             };
