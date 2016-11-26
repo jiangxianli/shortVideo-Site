@@ -133,6 +133,7 @@ $(function () {
                                     video.video.src = card.attr('data-src');
                                     video.video.load();
                                     _this.incrementClickCount(card.attr('data-click-count-url'))
+                                    _this.watchRecord(card.attr('id'))
                                 }
                             },
                             playingFun: function () {
@@ -141,7 +142,6 @@ $(function () {
                                     _default.curPlayVideo.pause();
                                 }
                                 _default.curPlayVideo = video.video;
-                                _this.watchRecord(card.attr('id'))
                             }
                         });
 
