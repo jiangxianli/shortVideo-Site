@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         Commands\SpiderYidian::class,
         Commands\ShortVideoRandom::class,
         Commands\UpdateUpOrDown::class,
+        Commands\UploadToQiniu::class,
     ];
 
     /**
