@@ -35,6 +35,7 @@ class QiniuModule
 
             $short_videos = ShortVideoFactory::shortVideoModel()
                 ->where('qiniu_key', '')
+                ->orderBy('up', 'desc')
                 ->skip(($i - 1) * $per_page)
                 ->take($per_page)
                 ->get();
